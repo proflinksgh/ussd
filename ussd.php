@@ -7,11 +7,12 @@
 
 
   if($text == ""){
-  	$response = 'CON Welcome to Accra Institute of Technology \n\n';
-  	$response .= 'Select option:\n';
-  	$response .= '1. Apply Admission\n';
-  	$response .= '2. View courses\n';
-  	$response .= '3. Pay fees\n';
+  	$response = "CON Welcome to Barry Financial Services\n\n";
+  	$response .= "Please select option:\n";
+  	$response .= "1. Our services\n";
+  	$response .= "2. Make transaction\n";
+  	$response .= "3. Make enquiry\n";
+    $response .= "4. View branches\n";
 
   }
 
