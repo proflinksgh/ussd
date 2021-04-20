@@ -23,10 +23,10 @@
       	$response .= "1. Savings account\n";
       	$response .= "2. Current account\n";
       	$response .= "3. Fixed deposit\n";
-      	$response .= "0. Back\n";
-      }  else if($text == "1*1"){
+      	$response .= "99. Back\n";
+      }  else if($text == "99"){
       	$response = "CON Enter full name:\n\n";
-      	$response .= "0. Back\n";
+      	$response .= "98. Back\n";
       }
 
 ?>
