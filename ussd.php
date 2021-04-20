@@ -7,7 +7,7 @@
 
 
   if($text == ""){
-  	$response = 'Welcome to Accra Institute of Technology \n\n';
+  	$response = 'CON Welcome to Accra Institute of Technology \n\n';
   	$response .= 'Select option:\n';
   	$response .= '1. Apply Admission\n';
   	$response .= '2. View courses\n';
