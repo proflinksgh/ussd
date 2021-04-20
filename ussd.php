@@ -29,8 +29,7 @@
       	$response .= "3. Fixed deposit\n";
       	$response .= "0. Back\n";
       }  else if($text == "1*0"){
-       // $_SESSION['open'] = "yes";
-      	$response = "CON Enter full name:t\n\n";
+      	$response = "END Enter full name:\n\n";
       	$response .= "0. Back\n";
       }
 
