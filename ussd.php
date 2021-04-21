@@ -31,7 +31,7 @@ if ($level == 1 && $ussd_string_exploded[0] == "1")
  
 }else if($level == 1 && $ussd_string_exploded[0] == "2"){
    $text = "Enter account number";
-   ussd_proceed($text)
+   ussd_proceed($text);
 }
 
 
@@ -43,7 +43,7 @@ if ($level == 2)
   $contact = $explode_input[0];
 
   $text = "Your name is: ".$name."\n Your contact is: ".$contact." \n\n 1. Confirm \n 2. Quit";
-  ussd_proceed($text)
+  ussd_proceed($text);
 }
 
 
