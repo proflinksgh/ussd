@@ -15,7 +15,7 @@ $service_code = $_GET['serviceCode'];
 $ussd_string= $_GET['text'];
 
 
-$level = 0;
+// $level = 0;
 
 $ussd_string_exploded = explode ("*",$ussd_string);
 $level = count($ussd_string_exploded);
