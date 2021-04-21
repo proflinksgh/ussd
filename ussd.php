@@ -27,7 +27,7 @@ if($level == 1 && $ussd_string == ""){
   display_register_info();
 }
 
-  $exist = str_contain ($ussd_string, "," ) : bool;
+  $exist = str_contain($ussd_string, "," ) : bool;
 
 if ($level == 2 && $exist== true)
 {
