@@ -1,7 +1,5 @@
 <?php
 header('Content-type: text/plain');
-
-<<<<<<< HEAD
 $url = parse_url(getenv("CLEARDB_DATABASE_URL"));
 
 $server = $url["host"];
@@ -10,26 +8,9 @@ $password = $url["pass"];
 $db = substr($url["path"], 1);
 
 $conn = new mysqli($server, $username, $password, $db);
-=======
-$dsn = 'mysql:dbname=stepbyst_lbookdb;host=127.0.0.1;'; //database name
-$user = 'root'; // your mysql user 
-$password = 'sheikhmo2XB@00#*#*'; // your mysql password
 
-//  Create a PDO instance that will allow you to access your database
-try {
-    $dbh = new PDO($dsn, $user, $password);
-}
-catch(PDOException $e) {
-    //var_dump($e);
-    echo("PDO error occurred");
-}
-catch(Exception $e) {
-    //var_dump($e);
-    echo("Error occurred");
-}
 
-// Get the parameters provided by Africa's Talking USSD gateway
->>>>>>> 2545d14e6497c975caa745267738440831f8476d
+
 
 $phone = $_GET['phoneNumber'];
 $session_id = $_GET['sessionId'];
@@ -37,17 +18,9 @@ $service_code = $_GET['serviceCode'];
 $ussd_string= $_GET['text'];
 
 
-//set default level to zero
 $level = 0;
 
-/* Split text input based on asteriks(*)
- * Africa's talking appends asteriks for after every menu level or input
- * One needs to split the response from Africa's Talking in order to determine
- * the menu level and input for each level
- * */
 $ussd_string_exploded = explode ("*",$ussd_string);
-
-// Get menu level from ussd_string reply
 $level = count($ussd_string_exploded);
 
 if($level == 1 or $level == 0){
@@ -144,8 +117,6 @@ function open_account($details,$phone, $dbh){
 }
 # close the pdo connection  
 $dbh = null;
-<<<<<<< HEAD
 ?>
-=======
-?>
->>>>>>> 2545d14e6497c975caa745267738440831f8476d
+
+
