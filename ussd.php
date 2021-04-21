@@ -41,7 +41,7 @@ if($level == 1 && $ussd_string_exploded[0] == ""){
 //   display_register_info();
 // }
 else{
-  echo "CON Level is: ".$level."String is: ".$ussd_string_exploded[1];
+  echo "CON Level is: ".$level."String is: ".$ussd_string;
 }
 
 
