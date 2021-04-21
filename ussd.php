@@ -65,7 +65,7 @@ function ussd_stop($ussd_text){
 //This is the home menu function
 function display_menu()
 {
-    $ussd_text =    "Welcome to Barry Financial Services\n\n Please select an option: \n 1. Open savings account \n2. Make deposit \n3. Make withdrawal  \n4. Check balance"; // add \n so that the menu has new lines
+    $ussd_text =    "Welcome to Barry Financial Services\n\n Please select an option:\n 1. Open savings account \n2. Make deposit \n3. Make withdrawal  \n4. Check balance"; // add \n so that the menu has new lines
     ussd_proceed($ussd_text);
 }
 
