@@ -25,7 +25,7 @@ if($level == 1 or $level == 0){
     display_menu(); // show the home/first menu
 }
 
-if ($level == 1)
+if ($level == 2)
 {
 
     if ($ussd_string_exploded[0] == "1")
@@ -62,7 +62,7 @@ function ussd_stop($ussd_text){
 //This is the home menu function
 function display_menu()
 {
-    $ussd_text =    "Welcome to Barry Financial Services\n\n Please select an option:\n1. Open savings account \n2. Make deposit \n3. Make withdrawal  \n4. Check balance"; // add \n so that the menu has new lines
+    $ussd_text =    "P"; // add \n so that the menu has new lines
     ussd_proceed($ussd_text);
 }
 
