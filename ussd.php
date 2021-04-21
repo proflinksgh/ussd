@@ -20,23 +20,32 @@ $level = 0;
 $ussd_string_exploded = explode ("*",$ussd_string);
 $level = count($ussd_string_exploded);
 
-if($level == 1){
+if($level == 1 or $level == 0){
     
     display_menu();
 }
 
-if ($level > 1)
+if ($level == 1 && $ussd_string_exploded[0] == "1")
 {
-
-    if ($ussd_string_exploded[0] == "1")
-    {
-      display_register_info();
-    }
-
-  else if ($ussd_string_exploded[0] == "2"){
-        about($ussd_string_exploded);
-    }
+   display_register_info();
+ 
+}else if($level == 1 && $ussd_string_exploded[0] == "2"){
+   $text = "Enter account number";
+   ussd_proceed($text)
 }
+
+
+if ($level == 2)
+{
+   //Store name contact in db
+  $explode_input = explode (",",$ussd_string);
+  $name = $explode_input[0];
+  $contact = $explode_input[0];
+
+  $text = "Your name is: ".$name."\n Your contact is: ".$contact." \n\n 1. Confirm \n 2. Quit";
+  ussd_proceed($text)
+}
+
 
 
 function ussd_proceed($ussd_text){
