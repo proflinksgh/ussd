@@ -21,33 +21,26 @@ $ussd_string_exploded = explode ("*",$ussd_string);
 $level = count($ussd_string_exploded);
 
 
-// if ($level == 1)
-// {
-//    display_register_info();
- 
-// }else if($level == 1 && $ussd_string_exploded[0] == "2"){
-//    $text = "Enter account number";
-//    ussd_proceed($text);
-// }
-
-
-
 if($level == 1 && $ussd_string == ""){
     display_menu();
 }else if($level == 1 && $ussd_string == "1"){
   display_register_info();
 }
 
+  $exist = str_contain ($ussd_string, "," ) : bool;
 
-if ($level == 2 && $ussd_string_exploded[0] == "1")
+if ($level == 2 && $exist== true)
 {
    //Store name contact in db
-  $explode_input = explode (",",$ussd_string);
-  $name = $explode_input[0];
-  $contact = $explode_input[0];
+    $explode_input = explode (",",$ussd_string);
+    $name = $explode_input[0];
+    $contact = $explode_input[1];
 
-  $text = "Your name is: ".$name."\n Your contact is: ".$contact." \n\n 1. Confirm \n 2. Quit";
-  ussd_proceed($text);
+    $text = "Your name is: ".$name."\n Your contact is: ".$contact." \n\n 1. Confirm \n 2. Quit";
+    ussd_proceed($text);
+  
+}else{
+    display_register_info();
 }
 
 
@@ -79,7 +72,7 @@ function about($ussd_text)
 function display_register_info()
 {
     $ussd_text = "Please enter your full name and phone number seperated by comma(,). For example: Joe Links, 0247058668";
-    ussd_stop($ussd_text);
+    ussd_proceed($ussd_text);
 }
 
 
