@@ -35,7 +35,7 @@ if ($level == 1 && $ussd_string_exploded[0] == "1")
 
 
 
-if($level == 1 && $is_val == "no"){
+if($level == 1 && $ussd_string_exploded[0] == ""){
     
     display_menu();
 }
