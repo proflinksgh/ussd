@@ -20,7 +20,7 @@ $level = 0;
 $ussd_string_exploded = explode ("*",$ussd_string);
 $level = count($ussd_string_exploded);
 
-if($level == 1 or $level == 0){
+if($level == 0){
     
     display_menu();
 }
