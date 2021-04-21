@@ -22,7 +22,7 @@ $level = count($ussd_string_exploded);
 
 if($level == 1 or $level == 0){
     
-    display_menu(); // show the home/first menu
+    display_menu();
 }
 
 if ($level == 2)
@@ -30,44 +30,33 @@ if ($level == 2)
 
     if ($ussd_string_exploded[0] == "1")
     {
-        // If user selected 1 send them to the registration menu
-        //open_account($ussd_string_exploded,$phone, $dbh);
       display_register_info();
     }
 
   else if ($ussd_string_exploded[0] == "2"){
-        //If user selected 2, send them to the about menu
         about($ussd_string_exploded);
     }
 }
 
-/* The ussd_proceed function appends CON to the USSD response your application gives.
- * This informs Africa's Talking USSD gateway and consecuently Safaricom's
- * USSD gateway that the USSD session is till in session or should still continue
- * Use this when you want the application USSD session to continue
-*/
+
 function ussd_proceed($ussd_text){
     echo "CON $ussd_text";
 }
 
-/* This ussd_stop function appends END to the USSD response your application gives.
- * This informs Africa's Talking USSD gateway and consecuently Safaricom's
- * USSD gateway that the USSD session should end.
- * Use this when you to want the application session to terminate/end the application
-*/
+
 function ussd_stop($ussd_text){
     echo "END $ussd_text";
 }
 
-//This is the home menu function
+
 function display_menu()
 {
-    $ussd_text =    "P"; // add \n so that the menu has new lines
+    $ussd_text =    "Welcome to Barry Financial Services\n\n Please select an option: \n 1. Open savings account \n2. Make deposit \n3. Make withdrawal  \n4. Check balance"; // add \n so that the menu has new lines
     ussd_proceed($ussd_text);
 }
 
 
-// Function that hanldles About menu
+
 function about($ussd_text)
 {
     $ussd_text =    "This is a sample registration application";
@@ -76,11 +65,11 @@ function about($ussd_text)
 
 function display_register_info()
 {
-    $ussd_text =    "Please enter your full name and phone number seperated by comma(,). For example: Joe Links, 0247058668";
+    $ussd_text = "Please enter your full name and phone number seperated by comma(,). For example: Joe Links, 0247058668";
     ussd_stop($ussd_text);
 }
 
-// Function that handles Registration menu
+
 function open_account($details,$phone, $dbh){
     if(count($details) == 2)
     {
@@ -115,5 +104,4 @@ function open_account($details,$phone, $dbh){
 # close the pdo connection  
 $dbh = null;
 ?>
-
 
