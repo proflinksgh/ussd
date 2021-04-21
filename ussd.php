@@ -20,25 +20,22 @@ $level = 0;
 $ussd_string_exploded = explode ("*",$ussd_string);
 $level = count($ussd_string_exploded);
 
- $is_val = "no";
 
-if ($level == 1 && $ussd_string_exploded[0] == "1")
+if ($level == 1)
 {
-    $is_val = "yes";
    display_register_info();
  
 }else if($level == 1 && $ussd_string_exploded[0] == "2"){
-      $is_val = "yes";
    $text = "Enter account number";
    ussd_proceed($text);
 }
 
 
 
-if($level == 1 && $ussd_string_exploded[0] == ""){
+// if($level == 1 && $ussd_string_exploded[0] == ""){
     
-    display_menu();
-}
+//     display_menu();
+// }
 
 
 if ($level == 2)
