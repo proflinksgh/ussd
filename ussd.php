@@ -9,13 +9,13 @@ $db = substr($url["path"], 1);
 
 $conn = new mysqli($server, $username, $password, $db);
 
-$phone = $_GET['phoneNumber'];
-$session_id = $_GET['sessionId'];
-$service_code = $_GET['serviceCode'];
+$phone = $_POST['phoneNumber'];
+$session_id = $_POST['sessionId'];
+$service_code = $_POST['serviceCode'];
 $ussd_string= $_POST['text'];
 
 
-// $level = 0;
+$level = 0;
 
 $ussd_string_exploded = explode ("*",$ussd_string);
 $level = count($ussd_string_exploded);
@@ -32,16 +32,10 @@ $level = count($ussd_string_exploded);
 
 
 
-if($level == 1 && $ussd_string_exploded[0] == ""){
-   // display_menu();
- echo "CON Level is: ".$level."String is: ".$ussd_string_exploded[0];
-}
-
-// else if($level == 1 && $ussd_string_exploded[0] == "1"){
-//   display_register_info();
-// }
-else{
-  echo "CON Level is: ".$level."String is: ".$ussd_string;
+if($level == 1 && $ussd_string == ""){
+    display_menu();
+}else if($level == 1 && $ussd_string == "1"){
+  display_register_info();
 }
 
 
