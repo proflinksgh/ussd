@@ -25,12 +25,7 @@ if($level == 1 && $ussd_string == ""){
     display_menu();
 }else if($level == 1 && $ussd_string == "1"){
   display_register_info();
-}
-
- // $exist = str_contain($ussd_string, "," ) : bool;
-$strl = strlen($ussd_string);
-
-if ($level == 2 && $strl > 10)
+}else if ($level == 2 && $strl > 10)
 {
    //Store name contact in db
     $explode_input = explode (",",$ussd_string);
