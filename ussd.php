@@ -25,7 +25,7 @@ if($level == 1 or $level == 0){
     display_menu();
 }
 
-if ($level == 2)
+if ($level > 1)
 {
 
     if ($ussd_string_exploded[0] == "1")
