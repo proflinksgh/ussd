@@ -38,7 +38,7 @@ if ($level == 1)
 // }
 
 
-if ($level == 2)
+if ($level == 2 && $ussd_string_exploded[0] == "1")
 {
    //Store name contact in db
   $explode_input = explode (",",$ussd_string);
