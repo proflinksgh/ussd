@@ -12,7 +12,7 @@ $conn = new mysqli($server, $username, $password, $db);
 $phone = $_GET['phoneNumber'];
 $session_id = $_GET['sessionId'];
 $service_code = $_GET['serviceCode'];
-$ussd_string= $_GET['text'];
+$ussd_string= $_POST['text'];
 
 
 // $level = 0;
