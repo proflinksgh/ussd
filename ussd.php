@@ -33,8 +33,9 @@ $level = count($ussd_string_exploded);
 
 
 if($level == 1 && $ussd_string_exploded[0] == ""){
-    
     display_menu();
+}else if($level == 1 && $ussd_string_exploded[0] == "1"){
+  display_register_info();
 }
 
 
