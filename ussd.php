@@ -21,21 +21,21 @@ $ussd_string_exploded = explode ("*",$ussd_string);
 $level = count($ussd_string_exploded);
 
 
-if ($level == 1)
-{
-   display_register_info();
+// if ($level == 1)
+// {
+//    display_register_info();
  
-}else if($level == 1 && $ussd_string_exploded[0] == "2"){
-   $text = "Enter account number";
-   ussd_proceed($text);
-}
-
-
-
-// if($level == 1 && $ussd_string_exploded[0] == ""){
-    
-//     display_menu();
+// }else if($level == 1 && $ussd_string_exploded[0] == "2"){
+//    $text = "Enter account number";
+//    ussd_proceed($text);
 // }
+
+
+
+if($level == 1 && $ussd_string_exploded[0] == ""){
+    
+    display_menu();
+}
 
 
 if ($level == 2 && $ussd_string_exploded[0] == "1")
