@@ -101,7 +101,13 @@ ussd_proceed($text);
  }
     
 
+}else if($level == 4 && $ussd_string == "1"){
+
+  $text = "Test here";
+    ussd_proceed($text);
 }
+
+
 
 
 
