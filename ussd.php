@@ -39,8 +39,8 @@ if($level == 1 && $ussd_string == ""){
     $text = "Please select account\n\n";
   while($row = mysqli_fetch_array($result))
     {
-      $text .= $i." ".$row['CONTACT'];   
       $i++;
+      $text .= $i.") ".$row['ACCOUNT_NUMBER']."\n";   
     }
       ussd_proceed($text); 
       
