@@ -26,10 +26,10 @@ if($level == 1 && $ussd_string == ""){
     display_menu();
 }else if($level == 1 && $ussd_string == "1"){
   display_register_info();
-}else if ($level == 2 && $strl > 14)
+}else if ($level == 2)
 {
     
-    $text = "is here";
+    $text = $strl;
     
 
 //     $explode_input = explode (",",$ussd_string);
