@@ -82,8 +82,13 @@ function display_register_info()
 
 
 function open_account(){
-    ussd_stop($_SESSION['name']);
-// $sql = "INSERT INTO `payment_tb` (REQUEST_ID, AMOUNT, PAYMENT_CODE) VALUES ('$requestid', '$amount', '$code')"; 
+   
+    $text = "Name is: ".$_SESSION['name'];
+    
+    ussd_stop($text);
+
+    
+    // $sql = "INSERT INTO `payment_tb` (REQUEST_ID, AMOUNT, PAYMENT_CODE) VALUES ('$requestid', '$amount', '$code')"; 
 // $result = mysqli_query($conn ,$sql);
 // $json = array();
 
