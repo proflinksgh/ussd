@@ -117,9 +117,6 @@ if($result) {
     $text = "No account found";
     ussd_proceed($text);
  }
-
-
-  
 }
 
 
