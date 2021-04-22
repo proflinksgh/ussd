@@ -30,8 +30,9 @@ if($level == 1 && $ussd_string == ""){
   display_register_info();
 }else if($level == 1 && $ussd_string == "2"){
 
-  //Fetch accounts
-  fetch_accounts(); 
+  //fetch_accounts(); 
+    $text = "Phone is: ".$phone;
+    ussd_proceed($text);
   
 }else if ($level == 2 && $strl > 5 && $match)
 {
