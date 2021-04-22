@@ -102,14 +102,14 @@ ussd_proceed($text);
  }
     
 
-}else if($level == 4 && $ussd_string == "1"){
+}else if($level == 3 && $ussd_string == "1"){
 
   $text = "Enter amount(GH¢): ";
   ussd_proceed($text);
 
-}else if($level == 4 && $ussd_string == "2"){
+}else if($level == 3 && $ussd_string == "2"){
   display_menu();
-}else if($level == 5 && is_numeric($ussd_string)){
+}else if($level == 4 && is_numeric($ussd_string)){
 
   $sql ="SELECT * FROM `new_account` WHERE `CONTACT` LIKE '%".$phone."%' ORDER BY ID DESC LIMIT 1";
   $result = $conn->query($sql);
@@ -154,20 +154,8 @@ ussd_proceed($text);
       ussd_proceed($text); 
   }
 
-
-
-
-
-
-
-
-    
-
-
-
-
 }
-
+}
 
 
 
