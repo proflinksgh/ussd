@@ -21,10 +21,10 @@ try {
 //     ussd_stop($text);
 }
 catch(PDOException $e) {
- $connect = "no";
+ $connect = $e;
 }
 catch(Exception $e) {
- $connect= "no";
+ $connect= $e;
 //     echo("Error occurred");
 //      ussd_stop($text);
 }
