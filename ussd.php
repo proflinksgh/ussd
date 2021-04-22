@@ -10,30 +10,6 @@ $db = substr($url["path"], 1);
 $conn = new mysqli($server, $username, $password, $db);
 $status = $conn?'connected':'Not connected';
 
-// $dsn = 'mysql:dbname=$db;host=$server'; //database name
-// $user = $username; // your mysql user 
-// $password = $password; // your mysql password
-
-// //  Create a PDO instance that will allow you to access your database
-// try {
-//     $dbh = new PDO($dsn, $user, $password);
-// //     $text = "connected";
-//     $connect = "yes";
-// //     ussd_stop($text);
-// }
-// catch(PDOException $e) {
-//  $connect = $e;
-// }
-// catch(Exception $e) {
-//  $connect= $e;
-// //     echo("Error occurred");
-// //      ussd_stop($text);
-// }
-
-
-
-
-
 $phone = $_POST['phoneNumber'];
 $session_id = $_POST['sessionId'];
 $service_code = $_POST['serviceCode'];
@@ -68,7 +44,7 @@ if($level == 1 && $ussd_string == ""){
 }else if($level == 3){
     
     //Post into database
-    ussd_stop("Status: ".$status);
+    open_account();
     
 }
 
@@ -105,37 +81,18 @@ function display_register_info()
 }
 
 
-// function open_account($details,$phone, $dbh){
-//     if(count($details) == 2)
-//     {
-        
-//         $ussd_text = "Please enter your Full Name and Email, each seperated by commas:";
-//         ussd_proceed($ussd_text); // ask user to enter registration details
-//     }
-//     if(count($details)== 3)
-//     {
-//         if (empty($details[1])){
-//                 $ussd_text = "Sorry we do not accept blank values";
-//                 ussd_proceed($ussd_text);
-//         } else {
-//         $input = explode(",",$details[1]);//store input values in an array
-//         $full_name = $input[0];//store full name
-//         $email = $input[1];//store email
-//         $phone_number =$phone;//store phone number 
+function open_account(){
+    ussd_stop($_SESSION['name']);
+// $sql = "INSERT INTO `payment_tb` (REQUEST_ID, AMOUNT, PAYMENT_CODE) VALUES ('$requestid', '$amount', '$code')"; 
+// $result = mysqli_query($conn ,$sql);
+// $json = array();
 
-//         // build sql statement
-//         $sth = $dbh->prepare("INSERT INTO customer (full_name, email, phone) VALUES('$full_name','$email','$phone_number')");
-//         //execute insert query   
-//         $sth->execute();
-//         if($sth->errorCode() == 0) {
-//             $ussd_text = $full_name." your registration was successful. Your email is ".$email." and phone number is ".$phone_number;
-//             ussd_proceed($ussd_text);
-//         } else {
-//             $errors = $sth->errorInfo();
-//         }
-//     }
+// if($result) {
+
+// echo "successful";
+ 
 // }
-// }
+}
 
 
 // $dbh = null;
