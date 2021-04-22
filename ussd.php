@@ -28,7 +28,7 @@ if($level == 1 && $ussd_string == ""){
   display_register_info();
 }else if ($level == 2 && $strl > 14)
 {
-    $explode_input = explode (",",$ussd_string_exploded );
+    $explode_input = explode (",",$ussd_string_exploded[1]);
     $name = $explode_input[0];
     $contact = $explode_input[1];
 
