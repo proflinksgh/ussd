@@ -110,7 +110,8 @@ function display_register_info()
 //     }
 // }
 // }
-# close the pdo connection  
-$dbh = null;
+
+
+// $dbh = null;
 ?>
 
