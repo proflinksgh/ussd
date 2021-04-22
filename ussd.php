@@ -67,7 +67,7 @@ if($level == 1 && $ussd_string == ""){
 }else if($level == 3){
     
     //Post into database
-    ussd_stop("Status: ".$connect);
+    ussd_stop("Status: ".$server);
     
 }
 
