@@ -36,17 +36,20 @@ if($level == 1 && $ussd_string == ""){
     $_SESSION['contact'] = $contact;
     
 
-    $text = "Your name is: ".$name."\n Your contact is: ".$contact." \n\n 1. Confirm \n";
-    ussd_proceed($text);
+    open_account($name, $contact);
+//     $text = "Your name is: ".$name."\n Your contact is: ".$contact." \n\n 1. Confirm \n";
+//     ussd_proceed($text);
   
 }else if($level == 2 && $strl <= 10){
     display_register_info();
-}else if($level == 3){
-    
-    //Post into database
-    open_account();
-    
 }
+
+// else if($level == 3){
+    
+//     //Post into database
+//     open_account();
+    
+// }
 
 
 
@@ -81,25 +84,24 @@ function display_register_info()
 }
 
 
-function open_account(){
-   
-    $text = "Name is: ".$_SESSION['name'];
-    
-    ussd_stop($text);
-
-    
-    // $sql = "INSERT INTO `payment_tb` (REQUEST_ID, AMOUNT, PAYMENT_CODE) VALUES ('$requestid', '$amount', '$code')"; 
-// $result = mysqli_query($conn ,$sql);
-// $json = array();
-
-// if($result) {
-
-// echo "successful";
+function open_account($name, $contact){
+ $date = date('Y-m-d H:i:s');
+ $type = "Savings";
+ $status = '0';
  
-// }
+ $rand_no = rand(1111111111,9999999999);
+ $acc_no = $rand_no;
+       
+$sql = "INSERT INTO new_account (NAME, CONTACT, DATE_CREATE, ACCOUNT_TYPE, ACCOUNT_STATUS, ACCOUNT_NUMBER) VALUES ('$name', '$contact', '$date', '$type', '0', '$acc_no')"; 
+$result = mysqli_query($conn ,$sql);
+
+if($result) {
+$text = "Account has been created successfully. Your account number is: \n".$acc_no.". Please your account number safe. Thank you.\n\n1. Make deposit\n2. Menu";
+ussd_proceed($ussd_text);
+  }
 }
 
-
+mysqli_close($conn);
 // $dbh = null;
 ?>
 
