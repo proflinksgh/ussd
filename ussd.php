@@ -94,9 +94,11 @@ function open_account($name, $contact){
  $acc_no = $rand_no;
     
 $sql = "INSERT INTO new_account (NAME, CONTACT, DATE_CREATE, ACCOUNT_TYPE, ACCOUNT_STATUS, ACCOUNT_NUMBER) VALUES ('$name', '$contact', '$date', '$type', '0', '$acc_no')"; 
-$result = mysqli_query($conn ,$sql);
+
+        ussd_proceed("here now");
+    //$result = mysqli_query($conn ,$sql);
     
-    ussd_proceed("here now");
+
 
 // if($result) {
 //      ussd_stop("successful");
