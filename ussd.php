@@ -30,17 +30,17 @@ if($level == 1 && $ussd_string == ""){
   display_register_info();
 }else if($level == 1 && $ussd_string == "2"){
  
-  $sql ="SELECT * FROM `new_account` WHERE `CONTACT` LIKE '%+233247058668%'";
+  $sql ="SELECT * FROM `new_account` WHERE `CONTACT` LIKE '%".$phone."%'";
   $result = $conn->query($sql);
      
   if($result ){
       
     $i=0; 
-    $text = "Please select account\n\n";
+    $text = "Select account number to receive deposit\n\n";
   while($row = mysqli_fetch_array($result))
     {
       $i++;
-      $text .= $i.") ".$row['ACCOUNT_NUMBER']."\n";   
+      $text .= $row['ACCOUNT_NUMBER'].". ".$row['ACCOUNT_NUMBER']."\n";   
     }
       ussd_proceed($text); 
       
