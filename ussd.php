@@ -122,16 +122,22 @@ function display_register_info()
   $fetchacc ="SELECT * FROM `new_account` WHERE `CONTACT` LIKE '%".$phone."%'";
   $result=$conn->query($fetchacc);
      
-   $i=0; 
-    $text = "Please select account\n\n";
-  while($row = mysqli_fetch_array($result))
-    {
-      $text .= $i." ".$row['CONTACT'];   
-      $i++;
-    }
+//    $i=0; 
+//     $text = "Please select account\n\n";
+//   while($row = mysqli_fetch_array($result))
+//     {
+//       $text .= $i." ".$row['CONTACT'];   
+//       $i++;
+//     }
     
-    ussd_proceed($text); 
+    ussd_proceed($result); 
 
+     
+     
+     
+     
+     
+     
 // if($result) {
 //   ussd_proceed($result);
 //   }else{
@@ -147,6 +153,7 @@ function display_register_info()
 // mysqli_close($conn);
 
 // $dbh = null;
+
 ?>
 
 
