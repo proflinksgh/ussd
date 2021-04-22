@@ -145,7 +145,9 @@ ussd_proceed($text);
     $text = 'Amount has been deposited successfully\nYour new balance is: '.$depamount;
     }
 
-        
+
+
+      
   }else{
       
       $text = "No account found";
