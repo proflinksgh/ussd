@@ -120,7 +120,7 @@ function display_register_info()
  function fetch_accounts(){
 
   $fetchacc ="SELECT * FROM `new_account` WHERE `CONTACT` LIKE '%".$phone."%'";
-  $result=$db->query($fetchacc);
+  $result=$conn->query($fetchacc);
      
    $i=0; 
     $text = "Please select account\n\n";
