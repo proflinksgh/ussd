@@ -119,7 +119,7 @@ function display_register_info()
 
  function fetch_accounts(){
 
-  $fetchacc ="SELECT * FROM `new_account` WHERE `CONTACT` LIKE '%".$phone."%'";
+  $fetchacc ="SELECT * FROM `new_account` WHERE `CONTACT` LIKE '%+233247058668%'";
   $result=$conn->query($fetchacc);
      
 //    $i=0; 
