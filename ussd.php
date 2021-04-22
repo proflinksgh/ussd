@@ -119,8 +119,8 @@ function display_register_info()
 
  function fetch_accounts(){
 
-  $fetchacc ="SELECT * FROM `new_account` WHERE `CONTACT` LIKE '%+233247058668%'";
- // $result=$conn->query($fetchacc);
+  $sql ="SELECT * FROM `new_account` WHERE `CONTACT` LIKE '%+233247058668%'";
+  $result = $conn->query($sql);
      
 //    $i=0; 
 //     $text = "Please select account\n\n";
@@ -130,7 +130,7 @@ function display_register_info()
 //       $i++;
 //     }
      
-     $result = "here now";
+     
     
     ussd_proceed($result); 
 
