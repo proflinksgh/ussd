@@ -129,6 +129,8 @@ function display_register_info()
 //       $text .= $i." ".$row['CONTACT'];   
 //       $i++;
 //     }
+     
+     $result = "here now";
     
     ussd_proceed($result); 
 
