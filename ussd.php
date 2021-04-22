@@ -93,10 +93,14 @@ function open_account($name, $contact){
  $rand_no = rand(1111111111,9999999999);
  $acc_no = $rand_no;
     
-  $sql = "INSERT INTO new_account (NAME, CONTACT, DATE_CREATE, ACCOUNT_TYPE, ACCOUNT_STATUS, ACCOUNT_NUMBER) VALUES ('$name', '$contact', '$date', '$type', '0', '$acc_no')"; 
-
+  $sql = "INSERT INTO `new_account`(`NAME`, `CONTACT`, `DATE_CREATE`, `ACCOUNT_TYPE`, `ACCOUNT_STATUS`, `ACCOUNT_NUMBER`) VALUES ('$name', '$contact', '$date', '$type', '0', '$acc_no')"; 
   $result = $conn->query($sql);
-  ussd_proceed("here now");
+   if($result){
+       ussd_proceed("success");
+   }else{
+       ussd_proceed("failed");
+   }
+  
 
     
 
