@@ -122,6 +122,17 @@ function display_register_info()
   $sql ="SELECT * FROM `new_account` WHERE `CONTACT` LIKE '%+233247058668%'";
   $result = $conn->query($sql);
      
+  if($result ){
+      
+      $text = "Good job";
+      ussd_proceed($text); 
+      
+  }else{
+      
+       $text = "False job";
+      ussd_proceed($text); 
+  }
+     
 //    $i=0; 
 //     $text = "Please select account\n\n";
 //   while($row = mysqli_fetch_array($result))
@@ -132,7 +143,7 @@ function display_register_info()
      
      
     
-    ussd_proceed($result); 
+    
 
      
      
