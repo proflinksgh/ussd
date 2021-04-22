@@ -35,7 +35,7 @@ if($level == 1 && $ussd_string == ""){
   
 }else if ($level == 2 && $strl > 5 && $match)
 {
-    $namespl = explode ("*",$ussd_string_exploded);
+    $namespl = explode ("*",$ussd_string_exploded[1]);
     $ussd_string = $namespl[0];
     $date = date('Y-m-d H:i:s');
     $type = "Savings";
@@ -59,7 +59,7 @@ ussd_proceed($text);
 }else if($level == 2 && $strl <= 5){
     display_register_info();
 }else if($level == 3 && $strl > 4 && $match){
-    $namespl = explode ("*",$ussd_string_exploded);
+    $namespl = explode ("*",$ussd_string_exploded[1]);
     $ussd_string = $namespl[0];
     
     $date = date('Y-m-d H:i:s');
