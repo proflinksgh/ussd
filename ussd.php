@@ -102,10 +102,10 @@ ussd_proceed($text);
  }
     
 
-}else if($level == 4 && $ussd_string == "1"){
+}else if($level == 4){
 
-  $text = "Enter amount(GH¢): ";
-  ussd_proceed($text);
+//   $text = "Enter amount(GH¢): ";
+  ussd_proceed($ussd_string);
 
 }else if($level == 4 && $ussd_string == "2"){
   display_menu();
