@@ -30,6 +30,7 @@ if($level == 1 && $ussd_string == ""){
 {
     
     $text = $strl;
+    ussd_proceed($text);
     
 
 //     $explode_input = explode (",",$ussd_string);
