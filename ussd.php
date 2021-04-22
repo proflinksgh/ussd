@@ -38,9 +38,38 @@ if($level == 1 && $ussd_string == ""){
     $_SESSION['name'] = $name;
     $_SESSION['contact'] = $contact;
     
+ $date = date('Y-m-d H:i:s');
+ $type = "Savings";
+ $status = '0';
+ 
+ $rand_no = rand(1111111111,9999999999);
+ $acc_no = $rand_no;
+    
+  $sql = "INSERT INTO `new_account`(`NAME`, `CONTACT`, `DATE_CREATE`, `ACCOUNT_TYPE`, `ACCOUNT_STATUS`, `ACCOUNT_NUMBER`) VALUES ('$name', '$contact', '$date', '$type', '$status', '$acc_no')"; 
+  $result = $conn->query($sql);
 
-    open_account($name, $contact);
+   if($result){
+       $text = "success";
+       ussd_proceed($text);
+   }else{
+       $text = "failed";
+       ussd_proceed($text);
+   }
   
+
+    
+
+
+// if($result) {
+//      ussd_stop("successful");
+// $text = "Account has been created successfully. Your account number is: \n".$acc_no.". Please your account number safe. Thank you.\n\n1. Make deposit\n2. Menu";
+// ussd_proceed($ussd_text);
+//   }else{
+//     ussd_stop("failed");
+//     }
+  
+
+
 }else if($level == 2 && $strl <= 10){
     display_register_info();
 }
@@ -85,37 +114,9 @@ function display_register_info()
 }
 
 
-function open_account($name, $contact){
- $date = date('Y-m-d H:i:s');
- $type = "Savings";
- $status = '0';
- 
- $rand_no = rand(1111111111,9999999999);
- $acc_no = $rand_no;
-    
-  $sql = "INSERT INTO `new_account`(`NAME`, `CONTACT`, `DATE_CREATE`, `ACCOUNT_TYPE`, `ACCOUNT_STATUS`, `ACCOUNT_NUMBER`) VALUES ('$name', '$contact', '$date', '$type', '0', '$acc_no')"; 
-  $result = $conn->query($sql);
-   if($result){
-       ussd_proceed("success");
-   }else{
-       ussd_proceed("failed");
-   }
-  
-
-    
-
-
-// if($result) {
-//      ussd_stop("successful");
-// $text = "Account has been created successfully. Your account number is: \n".$acc_no.". Please your account number safe. Thank you.\n\n1. Make deposit\n2. Menu";
-// ussd_proceed($ussd_text);
-//   }else{
-//     ussd_stop("failed");
-//     }
-}
-
 // mysqli_close($conn);
 
 // $dbh = null;
 ?>
+
 
