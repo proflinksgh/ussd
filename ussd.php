@@ -28,42 +28,36 @@ if($level == 1 && $ussd_string == ""){
     display_menu();
 }else if($level == 1 && $ussd_string == "1"){
   display_register_info();
+}else if($level == 1 && $ussd_string == "2"){
+
+  //Fetch accounts
+  fetch_accounts(); 
+  
 }else if ($level == 2 && $strl > 5 && $match)
 {
-    $explode_input = explode (",",$ussd_string_exploded[1]);
-    $name = $explode_input[0];
-    $contact = $explode_input[1];
-    $_SESSION['name'] = $name;
-    $_SESSION['contact'] = $contact;
+  
+    $name = $ussd_string;
+    $date = date('Y-m-d H:i:s');
+    $type = "Savings";
+    $status = '0';
+    $rand_no = rand(1111111111,9999999999);
+    $acc_no = $rand_no;
     
- $date = date('Y-m-d H:i:s');
- $type = "Savings";
- $status = '0';
- 
- $rand_no = rand(1111111111,9999999999);
- $acc_no = $rand_no;
-    
- open_account($name, $contact, $date, $acc_no, $type, $status);
+ open_account($name, $phone, $date, $acc_no, $type, $status);
 
 
 }else if($level == 2 && $strl <= 5){
     display_register_info();
 }else if($level == 3 && $strl > 4 && $match){
 
-    $explode_input = explode (",",$ussd_string_exploded[1]);
-    $name = $explode_input[0];
-    $contact = $explode_input[1];
-    $_SESSION['name'] = $name;
-    $_SESSION['contact'] = $contact;
+     $name = $ussd_string;
+    $date = date('Y-m-d H:i:s');
+    $type = "Savings";
+    $status = '0';
+    $rand_no = rand(1111111111,9999999999);
+    $acc_no = $rand_no;
     
- $date = date('Y-m-d H:i:s');
- $type = "Savings";
- $status = '0';
- 
- $rand_no = rand(1111111111,9999999999);
- $acc_no = $rand_no;
-    
- open_account($name, $contact, $date, $acc_no, $type, $status);
+ open_account($name, $phone, $date, $acc_no, $type, $status
 
 }
 
@@ -110,6 +104,21 @@ ussd_proceed($text);
     $text = "Invalid name entered.\n\nPlease enter your full name:";
     ussd_proceed($text);
  }
+
+
+ function fetch_accounts(){
+  $fetchacc ="SELECT * FROM new_account WHERE `CONTACT` LIKE '%".$phone."%'";
+  $result=$db->query($fetchacc);
+  $result=$result->fetch_assoc();
+
+if($result) {
+  ussd_proceed($result);
+  }else{
+    $text = "No account found";
+    ussd_proceed($text);
+ }
+
+
   
 }
 
