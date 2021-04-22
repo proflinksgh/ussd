@@ -7,7 +7,31 @@ $username = $url["user"];
 $password = $url["pass"];
 $db = substr($url["path"], 1);
 
-$conn = new mysqli($server, $username, $password, $db);
+//$conn = new mysqli($server, $username, $password, $db);
+
+$dsn = 'mysql:dbname=$db;host=$server'; //database name
+$user = $username; // your mysql user 
+$password = $password; // your mysql password
+
+//  Create a PDO instance that will allow you to access your database
+try {
+    $dbh = new PDO($dsn, $user, $password);
+//     $text = "connected";
+    $_SESSION['connect'] = "yes";
+//     ussd_stop($text);
+}
+catch(PDOException $e) {
+ $_SESSION['connected'] = "no";
+}
+catch(Exception $e) {
+ $_SESSION['connect'] = "no";
+//     echo("Error occurred");
+//      ussd_stop($text);
+}
+
+
+
+
 
 $phone = $_POST['phoneNumber'];
 $session_id = $_POST['sessionId'];
@@ -31,12 +55,20 @@ if($level == 1 && $ussd_string == ""){
     $explode_input = explode (",",$ussd_string_exploded[1]);
     $name = $explode_input[0];
     $contact = $explode_input[1];
+    $_SESSION['name'] = $name;
+    $_SESSION['contact'] = $contact;
+    
 
-    $text = "Your name is: ".$name."\n Your contact is: ".$contact." \n\n 1. Confirm \n 2. Quit";
+    $text = "Your name is: ".$name."\n Your contact is: ".$contact." \n\n 1. Confirm \n";
     ussd_proceed($text);
   
 }else if($level == 2 && $strl <= 10){
     display_register_info();
+}else if($level == 3){
+    
+    //Post into database
+    ussd_stop("Status: ".$_SESSION['connect']);
+    
 }
 
 
