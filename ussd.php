@@ -79,7 +79,7 @@ ussd_proceed($text);
     
 }else if($level == 2 && $strl <= 5){
     display_register_info();
-}else if($level == 3 && $strl > 4 && $match){
+}else if($level == 3 && $strl > 7 && $match){
     $namespl = explode ("*",$ussd_string_exploded[1]);
     $ussd_string = $namespl[0];
     
