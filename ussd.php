@@ -35,22 +35,22 @@ if($level == 1 && $ussd_string == ""){
      
   if($result ){
       
-      $text = "Good job";
+    $i=0; 
+    $text = "Please select account\n\n";
+  while($row = mysqli_fetch_array($result))
+    {
+      $text .= $i." ".$row['CONTACT'];   
+      $i++;
+    }
       ussd_proceed($text); 
       
   }else{
       
-       $text = "False job";
+      $text = "No account found";
       ussd_proceed($text); 
   }
      
-//    $i=0; 
-//     $text = "Please select account\n\n";
-//   while($row = mysqli_fetch_array($result))
-//     {
-//       $text .= $i." ".$row['CONTACT'];   
-//       $i++;
-//     }
+
      
   
 }else if ($level == 2 && $strl > 5 && $match)
