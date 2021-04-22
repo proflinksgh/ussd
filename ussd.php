@@ -95,14 +95,16 @@ function open_account($name, $contact){
     
 $sql = "INSERT INTO new_account (NAME, CONTACT, DATE_CREATE, ACCOUNT_TYPE, ACCOUNT_STATUS, ACCOUNT_NUMBER) VALUES ('$name', '$contact', '$date', '$type', '0', '$acc_no')"; 
 $result = mysqli_query($conn ,$sql);
+    
+    ussd_proceed("here now");
 
-if($result) {
-     ussd_stop("successful");
-//$text = "Account has been created successfully. Your account number is: \n".$acc_no.". Please your account number safe. Thank you.\n\n1. Make deposit\n2. Menu";
-//ussd_proceed($ussd_text);
-  }else{
-    ussd_stop("failed");
-    }
+// if($result) {
+//      ussd_stop("successful");
+// $text = "Account has been created successfully. Your account number is: \n".$acc_no.". Please your account number safe. Thank you.\n\n1. Make deposit\n2. Menu";
+// ussd_proceed($ussd_text);
+//   }else{
+//     ussd_stop("failed");
+//     }
 }
 
 mysqli_close($conn);
