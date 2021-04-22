@@ -108,16 +108,17 @@ ussd_proceed($text);
 
 
  function fetch_accounts(){
-  $fetchacc ="SELECT * FROM new_account WHERE `CONTACT` LIKE '%".$phone."%'";
-  $result=$db->query($fetchacc);
-  $result=$result->fetch_assoc();
+  ussd_proceed($phone);
+  // $fetchacc ="SELECT * FROM `new_account` WHERE `CONTACT` LIKE '%".$phone."%'";
+  // $result=$db->query($fetchacc);
+  // $result=$result->fetch_assoc();
 
-if($result) {
-  ussd_proceed($result);
-  }else{
-    $text = "No account found";
-    ussd_proceed($text);
- }
+// if($result) {
+//   ussd_proceed($result);
+//   }else{
+//     $text = "No account found";
+//     ussd_proceed($text);
+//  }
 
 
   
