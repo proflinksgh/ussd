@@ -24,13 +24,14 @@ $level = 0;
 $ussd_string_exploded = explode ("*",$ussd_string);
 $level = count($ussd_string_exploded);
 $strl = strlen($ussd_string);
+$match = preg_match("/[a-z]/i", $ussd_string);
 
 
 if($level == 1 && $ussd_string == ""){
     display_menu();
 }else if($level == 1 && $ussd_string == "1"){
   display_register_info();
-}else if ($level == 2 && $strl > 14)
+}else if ($level == 2 && $strl > 5 && $match)
 {
     $explode_input = explode (",",$ussd_string_exploded[1]);
     $name = $explode_input[0];
@@ -48,29 +49,25 @@ if($level == 1 && $ussd_string == ""){
   $sql = "INSERT INTO `new_account`(`NAME`, `CONTACT`, `DATE_CREATE`, `ACCOUNT_TYPE`, `ACCOUNT_STATUS`, `ACCOUNT_NUMBER`) VALUES ('$name', '$contact', '$date', '$type', '$status', '$acc_no')"; 
   $result = $conn->query($sql);
 
-   if($result){
-       $text = "success";
-       ussd_proceed($text);
-   }else{
-       $text = "failed";
-       ussd_proceed($text);
-   }
+//    if($result){
+//        $text = "success";
+//        ussd_proceed($text);
+//    }else{
+//        $text = "failed";
+//        ussd_proceed($text);
+//    }
   
-
-    
-
-
-// if($result) {
-//      ussd_stop("successful");
-// $text = "Account has been created successfully. Your account number is: \n".$acc_no.". Please your account number safe. Thank you.\n\n1. Make deposit\n2. Menu";
-// ussd_proceed($ussd_text);
-//   }else{
-//     ussd_stop("failed");
-//     }
+if($result) {
+$text = "Account has been created successfully. Your account number is:\n".$acc_no.". Please keep your account number safe.\n\nSelect option:\n1. Make deposit\n2. Menu";
+ussd_proceed($text);
+  }else{
+    $text = "Invalid name entered.\nPlease enter your full name";
+    ussd_proceed($text);
+ }
   
 
 
-}else if($level == 2 && $strl <= 10){
+}else if($level == 2 && $strl <= 5){
     display_register_info();
 }
 
@@ -95,7 +92,7 @@ function ussd_stop($ussd_text){
 
 function display_menu()
 {
-    $ussd_text =    "Welcome to Barry Financial Services\n\n Please select an option: \n 1. Open savings account \n2. Make deposit \n3. Make withdrawal  \n4. Check balance"; // add \n so that the menu has new lines
+    $ussd_text =    "Welcome to Barry Financial Services\n\nPlease select an option: \n1. Open savings account\n2. Make deposit\n3. Make withdrawal\n4. Check balance"; // add \n so that the menu has new lines
     ussd_proceed($ussd_text);
 }
 
@@ -109,7 +106,7 @@ function about($ussd_text)
 
 function display_register_info()
 {
-    $ussd_text = "Please enter your full name and phone number seperated by comma(,). For example: Joe Links, 0247058668";
+    $ussd_text = "Please enter your full name";
     ussd_proceed($ussd_text);
 }
 
