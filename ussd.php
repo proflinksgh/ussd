@@ -22,7 +22,6 @@ $ussd_string_exploded = explode ("*",$ussd_string);
 $level = count($ussd_string_exploded);
 $strl = strlen($ussd_string);
 $match = preg_match("/[a-z]/i", $ussd_string);
-$explode_input = explode (",",$ussd_string_exploded[1]);
 
 
 if($level == 1 && $ussd_string == ""){
@@ -31,7 +30,7 @@ if($level == 1 && $ussd_string == ""){
   display_register_info();
 }else if ($level == 2 && $strl > 5 && $match)
 {
-    
+    $explode_input = explode (",",$ussd_string_exploded[1]);
     $name = $explode_input[0];
     $contact = $explode_input[1];
     $_SESSION['name'] = $name;
@@ -44,14 +43,14 @@ if($level == 1 && $ussd_string == ""){
  $rand_no = rand(1111111111,9999999999);
  $acc_no = $rand_no;
     
- open_account($name, $contact, $date, $acc_no, $type, $status)
+ open_account($name, $contact, $date, $acc_no, $type, $status);
 
 
 }else if($level == 2 && $strl <= 5){
     display_register_info();
 }else if($level == 3 && $strl > 4 && $match){
-    //user try name entry again
 
+    $explode_input = explode (",",$ussd_string_exploded[1]);
     $name = $explode_input[0];
     $contact = $explode_input[1];
     $_SESSION['name'] = $name;
@@ -64,9 +63,8 @@ if($level == 1 && $ussd_string == ""){
  $rand_no = rand(1111111111,9999999999);
  $acc_no = $rand_no;
     
- open_account($name, $contact, $date, $acc_no, $type, $status)
+ open_account($name, $contact, $date, $acc_no, $type, $status);
 
-    
 }
 
 
