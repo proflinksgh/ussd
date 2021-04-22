@@ -121,14 +121,23 @@ function display_register_info()
 
   $fetchacc ="SELECT * FROM `new_account` WHERE `CONTACT` LIKE '%".$phone."%'";
   $result=$db->query($fetchacc);
-  $result=$result->fetch_assoc();
+     
+   $i=0; 
+    $text = "Please select account\n\n";
+  while($row = mysqli_fetch_array($result))
+    {
+      $text .= $i." ".$row['CONTACT'];   
+      $i++;
+    }
+    
+    ussd_proceed($text); 
 
-if($result) {
-  ussd_proceed($result);
-  }else{
-    $text = "No account found";
-    ussd_proceed($text);
- }
+// if($result) {
+//   ussd_proceed($result);
+//   }else{
+//     $text = "No account found";
+//     ussd_proceed($text);
+//  }
 
 
   
