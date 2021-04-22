@@ -104,6 +104,7 @@ ussd_proceed($text);
     $text = "Invalid name entered.\n\nPlease enter your full name:";
     ussd_proceed($text);
  }
+}
 
 
  function fetch_accounts(){
