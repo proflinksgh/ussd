@@ -14,6 +14,7 @@ $phone = $_POST['phoneNumber'];
 $session_id = $_POST['sessionId'];
 $service_code = $_POST['serviceCode'];
 $ussd_string= $_POST['text'];
+$date = date('Y-m-d H:i:s');
 
 
 $level = 0;
@@ -103,8 +104,68 @@ ussd_proceed($text);
 
 }else if($level == 4 && $ussd_string == "1"){
 
-  $text = "Test here";
-    ussd_proceed($text);
+  $text = "Enter amount(GH¢): ";
+  ussd_proceed($text);
+
+}else if($level == 4 && $ussd_string == "2"){
+  display_menu();
+}else if($level == 5 && is_numeric($ussd_string)){
+
+  $sql ="SELECT * FROM `new_account` WHERE `CONTACT` LIKE '%".$phone."%' ORDER BY ID DESC LIMIT 1";
+  $result = $conn->query($sql);
+     
+  if($result ){
+      
+  while($row = mysqli_fetch_array($result))
+    {
+      $acc_no= $row['ACCOUNT_NUMBER'];
+      $type= $row['ACCOUNT_TYPE']; 
+      $name= $row['NAME']; 
+      $contact= $row['CONTACT'];  
+    }
+
+  
+  $sql = "INSERT INTO `deposit`(`ACCOUNT_TYPE`, `NAME`, `AMOUNT`, `ACCOUNT_NUMBER`, `DATE_OF_DEPOSIT`) VALUES ('$type', '$name', '$ussd_string', '$acc_no', '$date')"; 
+  $result = $conn->query($sql);
+
+    if($result) {
+
+
+  $sql ="SELECT COUNT(AMOUNT) as depamount FROM `deposit` WHERE `ACCOUNT_NUMBER` LIKE '%".$acc_no."%'";
+  $result = $conn->query($sql);
+     
+  if($result ){
+      
+  while($row = mysqli_fetch_array($result))
+    {
+      $depamount= $row['depamount']; 
+    }
+
+
+    $text = 'Amount has been deposited successfully\nYour new balance is: '.$depamount;
+    }
+
+
+
+      
+  }else{
+      
+      $text = "No account found";
+      ussd_proceed($text); 
+  }
+
+
+
+
+
+
+
+
+    
+
+
+
+
 }
 
 
