@@ -26,19 +26,14 @@ if($level == 1 && $ussd_string == ""){
     display_menu();
 }else if($level == 1 && $ussd_string == "1"){
   display_register_info();
-}else if ($level == 2)
+}else if ($level == 2 && $strl > 14)
 {
-    
-    $text = $strl;
+    $explode_input = explode (",",$ussd_string);
+    $name = $explode_input[0];
+    $contact = $explode_input[1];
+
+    $text = "Your name is: ".$name."\n Your contact is: ".$contact." \n\n 1. Confirm \n 2. Quit";
     ussd_proceed($text);
-    
-
-//     $explode_input = explode (",",$ussd_string);
-//     $name = $explode_input[0];
-//     $contact = $explode_input[1];
-
-//     $text = "Your name is: ".$name."\n Your contact is: ".$contact." \n\n 1. Confirm \n 2. Quit";
-//     ussd_proceed($text);
   
 }
 
