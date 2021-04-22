@@ -10,6 +10,9 @@ $db = substr($url["path"], 1);
 $conn = new mysqli($server, $username, $password, $db);
 $status = $conn?'connected':'Not connected';
 
+mysqli_select_db($conn,$db)or die("cannot select DB");
+mysqli_set_charset($conn,'utf8');
+
 $phone = $_POST['phoneNumber'];
 $session_id = $_POST['sessionId'];
 $service_code = $_POST['serviceCode'];
@@ -90,7 +93,6 @@ function open_account($name, $contact){
  $rand_no = rand(1111111111,9999999999);
  $acc_no = $rand_no;
     
-       
 $sql = "INSERT INTO new_account (NAME, CONTACT, DATE_CREATE, ACCOUNT_TYPE, ACCOUNT_STATUS, ACCOUNT_NUMBER) VALUES ('$name', '$contact', '$date', '$type', '0', '$acc_no')"; 
 $result = mysqli_query($conn ,$sql);
 
