@@ -29,35 +29,53 @@ if($level == 1 && $ussd_string == ""){
 }else if($level == 1 && $ussd_string == "1"){
   display_register_info();
 }else if($level == 1 && $ussd_string == "2"){
-
-  //fetch_accounts(); 
+ 
     $text = "Phone is: ".$phone;
     ussd_proceed($text);
   
 }else if ($level == 2 && $strl > 5 && $match)
 {
-  
-    $name = $ussd_string;
     $date = date('Y-m-d H:i:s');
     $type = "Savings";
     $status = '0';
     $rand_no = rand(1111111111,9999999999);
     $acc_no = $rand_no;
     
- open_account($name, $phone, $date, $acc_no, $type, $status);
+  $sql = "INSERT INTO `new_account`(`NAME`, `CONTACT`, `DATE_CREATE`, `ACCOUNT_TYPE`, `ACCOUNT_STATUS`, `ACCOUNT_NUMBER`) VALUES ('$ussd_string', '$phone', '$date', '$type', '$status', '$acc_no')"; 
+  $result = $conn->query($sql);
 
+if($result) {
+$text = "Account has been created successfully. Your account number is:\n".$acc_no.". Please keep your account number safe.\n\nSelect option:\n1. Make deposit\n2. Menu";
+ussd_proceed($text);
+  }else{
+    $text = "Invalid name entered.\n\nPlease enter your full name:";
+    ussd_proceed($text);
+ }
+
+    
+    
 }else if($level == 2 && $strl <= 5){
     display_register_info();
 }else if($level == 3 && $strl > 4 && $match){
 
-    $name = $ussd_string;
     $date = date('Y-m-d H:i:s');
     $type = "Savings";
     $status = '0';
     $rand_no = rand(1111111111,9999999999);
     $acc_no = $rand_no;
     
- open_account($name, $phone, $date, $acc_no, $type, $status);
+
+  $sql = "INSERT INTO `new_account`(`NAME`, `CONTACT`, `DATE_CREATE`, `ACCOUNT_TYPE`, `ACCOUNT_STATUS`, `ACCOUNT_NUMBER`) VALUES ('$ussd_string', '$phone', '$date', '$type', '$status', '$acc_no')"; 
+  $result = $conn->query($sql);
+
+if($result) {
+$text = "Account has been created successfully. Your account number is:\n".$acc_no.". Please keep your account number safe.\n\nSelect option:\n1. Make deposit\n2. Menu";
+ussd_proceed($text);
+  }else{
+    $text = "Invalid name entered.\n\nPlease enter your full name:";
+    ussd_proceed($text);
+ }
+    
 
 }
 
@@ -91,19 +109,6 @@ function display_register_info()
 {
     $ussd_text = "Please enter your full name";
     ussd_proceed($ussd_text);
-}
-
-function open_account($name, $contact, $date, $acc_no, $type, $status){
-  $sql = "INSERT INTO `new_account`(`NAME`, `CONTACT`, `DATE_CREATE`, `ACCOUNT_TYPE`, `ACCOUNT_STATUS`, `ACCOUNT_NUMBER`) VALUES ('$name', '$contact', '$date', '$type', '$status', '$acc_no')"; 
-  $result = $conn->query($sql);
-
-if($result) {
-$text = "Account has been created successfully. Your account number is:\n".$acc_no.". Please keep your account number safe.\n\nSelect option:\n1. Make deposit\n2. Menu";
-ussd_proceed($text);
-  }else{
-    $text = "Invalid name entered.\n\nPlease enter your full name:";
-    ussd_proceed($text);
- }
 }
 
 
