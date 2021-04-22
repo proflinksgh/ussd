@@ -19,6 +19,7 @@ $level = 0;
 
 $ussd_string_exploded = explode ("*",$ussd_string);
 $level = count($ussd_string_exploded);
+$strl = strlen($ussd_string);
 
 
 if($level == 1 && $ussd_string == ""){
