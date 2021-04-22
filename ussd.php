@@ -7,27 +7,28 @@ $username = $url["user"];
 $password = $url["pass"];
 $db = substr($url["path"], 1);
 
-//$conn = new mysqli($server, $username, $password, $db);
+$conn = new mysqli($server, $username, $password, $db);
+$status = $conn?'connected':'Not connected';
 
-$dsn = 'mysql:dbname=$db;host=$server'; //database name
-$user = $username; // your mysql user 
-$password = $password; // your mysql password
+// $dsn = 'mysql:dbname=$db;host=$server'; //database name
+// $user = $username; // your mysql user 
+// $password = $password; // your mysql password
 
-//  Create a PDO instance that will allow you to access your database
-try {
-    $dbh = new PDO($dsn, $user, $password);
-//     $text = "connected";
-    $connect = "yes";
-//     ussd_stop($text);
-}
-catch(PDOException $e) {
- $connect = $e;
-}
-catch(Exception $e) {
- $connect= $e;
-//     echo("Error occurred");
-//      ussd_stop($text);
-}
+// //  Create a PDO instance that will allow you to access your database
+// try {
+//     $dbh = new PDO($dsn, $user, $password);
+// //     $text = "connected";
+//     $connect = "yes";
+// //     ussd_stop($text);
+// }
+// catch(PDOException $e) {
+//  $connect = $e;
+// }
+// catch(Exception $e) {
+//  $connect= $e;
+// //     echo("Error occurred");
+// //      ussd_stop($text);
+// }
 
 
 
@@ -67,7 +68,7 @@ if($level == 1 && $ussd_string == ""){
 }else if($level == 3){
     
     //Post into database
-    ussd_stop("Status: ".$server);
+    ussd_stop("Status: ".$status);
     
 }
 
