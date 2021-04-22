@@ -57,7 +57,7 @@ if($level == 1 && $ussd_string == ""){
     $rand_no = rand(1111111111,9999999999);
     $acc_no = $rand_no;
     
- open_account($name, $phone, $date, $acc_no, $type, $status
+ open_account($name, $phone, $date, $acc_no, $type, $status);
 
 }
 
@@ -117,6 +117,9 @@ if($result) {
     $text = "No account found";
     ussd_proceed($text);
  }
+
+
+  
 }
 
 
