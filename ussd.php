@@ -46,12 +46,11 @@ if($level == 1 && $ussd_string == ""){
     
  open_account($name, $phone, $date, $acc_no, $type, $status);
 
-
 }else if($level == 2 && $strl <= 5){
     display_register_info();
 }else if($level == 3 && $strl > 4 && $match){
 
-     $name = $ussd_string;
+    $name = $ussd_string;
     $date = date('Y-m-d H:i:s');
     $type = "Savings";
     $status = '0';
@@ -109,17 +108,17 @@ ussd_proceed($text);
 
 
  function fetch_accounts(){
-  ussd_proceed($phone);
-  // $fetchacc ="SELECT * FROM `new_account` WHERE `CONTACT` LIKE '%".$phone."%'";
-  // $result=$db->query($fetchacc);
-  // $result=$result->fetch_assoc();
 
-// if($result) {
-//   ussd_proceed($result);
-//   }else{
-//     $text = "No account found";
-//     ussd_proceed($text);
-//  }
+  $fetchacc ="SELECT * FROM `new_account` WHERE `CONTACT` LIKE '%".$phone."%'";
+  $result=$db->query($fetchacc);
+  $result=$result->fetch_assoc();
+
+if($result) {
+  ussd_proceed($result);
+  }else{
+    $text = "No account found";
+    ussd_proceed($text);
+ }
 
 
   
