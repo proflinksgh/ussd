@@ -36,11 +36,11 @@ if($level == 1 && $ussd_string == ""){
   if($result ){
       
     $i=0; 
-    $text = "Select account number to receive deposit\n\n";
+    $text = "Select account to receive deposit\n\n";
   while($row = mysqli_fetch_array($result))
     {
       $i++;
-      $text .= $row['ACCOUNT_NUMBER'].". ".$row['ACCOUNT_NUMBER']."\n";   
+      $text .= $row['ID'].". ".$row['ACCOUNT_NUMBER']."(".$row['NAME'].")\n";   
     }
       ussd_proceed($text); 
       
