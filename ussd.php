@@ -17,14 +17,14 @@ $password = $password; // your mysql password
 try {
     $dbh = new PDO($dsn, $user, $password);
 //     $text = "connected";
-    $_SESSION['connect'] = "yes";
+    $connect = "yes";
 //     ussd_stop($text);
 }
 catch(PDOException $e) {
- $_SESSION['connected'] = "no";
+ $connect = "no";
 }
 catch(Exception $e) {
- $_SESSION['connect'] = "no";
+ $connect= "no";
 //     echo("Error occurred");
 //      ussd_stop($text);
 }
@@ -67,7 +67,7 @@ if($level == 1 && $ussd_string == ""){
 }else if($level == 3){
     
     //Post into database
-    ussd_stop("Status: ".$_SESSION['connect']);
+    ussd_stop("Status: ".$connect);
     
 }
 
