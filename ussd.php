@@ -30,9 +30,28 @@ if($level == 1 && $ussd_string == ""){
   display_register_info();
 }else if($level == 1 && $ussd_string == "2"){
  
-//     $text = "Phone is: ".$phone;
-//     ussd_proceed($text);
-    fetch_accounts();
+  $sql ="SELECT * FROM `new_account` WHERE `CONTACT` LIKE '%+233247058668%'";
+  $result = $conn->query($sql);
+     
+  if($result ){
+      
+      $text = "Good job";
+      ussd_proceed($text); 
+      
+  }else{
+      
+       $text = "False job";
+      ussd_proceed($text); 
+  }
+     
+//    $i=0; 
+//     $text = "Please select account\n\n";
+//   while($row = mysqli_fetch_array($result))
+//     {
+//       $text .= $i." ".$row['CONTACT'];   
+//       $i++;
+//     }
+     
   
 }else if ($level == 2 && $strl > 5 && $match)
 {
@@ -116,51 +135,6 @@ function display_register_info()
     ussd_proceed($ussd_text);
 }
 
-
- function fetch_accounts(){
-
-  $sql ="SELECT * FROM `new_account` WHERE `CONTACT` LIKE '%+233247058668%'";
-  $result = $conn->query($sql);
-     
-  if($result ){
-      
-      $text = "Good job";
-      ussd_proceed($text); 
-      
-  }else{
-      
-       $text = "False job";
-      ussd_proceed($text); 
-  }
-     
-//    $i=0; 
-//     $text = "Please select account\n\n";
-//   while($row = mysqli_fetch_array($result))
-//     {
-//       $text .= $i." ".$row['CONTACT'];   
-//       $i++;
-//     }
-     
-     
-    
-    
-
-     
-     
-     
-     
-     
-     
-// if($result) {
-//   ussd_proceed($result);
-//   }else{
-//     $text = "No account found";
-//     ussd_proceed($text);
-//  }
-
-
-  
-}
 
 
 // mysqli_close($conn);
