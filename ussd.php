@@ -10,9 +10,6 @@ $db = substr($url["path"], 1);
 $conn = new mysqli($server, $username, $password, $db);
 $status = $conn?'connected':'Not connected';
 
-// mysqli_select_db($conn,$db)or die("cannot select DB");
-// mysqli_set_charset($conn,'utf8');
-
 $phone = $_POST['phoneNumber'];
 $session_id = $_POST['sessionId'];
 $service_code = $_POST['serviceCode'];
@@ -25,6 +22,7 @@ $ussd_string_exploded = explode ("*",$ussd_string);
 $level = count($ussd_string_exploded);
 $strl = strlen($ussd_string);
 $match = preg_match("/[a-z]/i", $ussd_string);
+$explode_input = explode (",",$ussd_string_exploded[1]);
 
 
 if($level == 1 && $ussd_string == ""){
@@ -33,7 +31,7 @@ if($level == 1 && $ussd_string == ""){
   display_register_info();
 }else if ($level == 2 && $strl > 5 && $match)
 {
-    $explode_input = explode (",",$ussd_string_exploded[1]);
+    
     $name = $explode_input[0];
     $contact = $explode_input[1];
     $_SESSION['name'] = $name;
@@ -46,37 +44,30 @@ if($level == 1 && $ussd_string == ""){
  $rand_no = rand(1111111111,9999999999);
  $acc_no = $rand_no;
     
-  $sql = "INSERT INTO `new_account`(`NAME`, `CONTACT`, `DATE_CREATE`, `ACCOUNT_TYPE`, `ACCOUNT_STATUS`, `ACCOUNT_NUMBER`) VALUES ('$name', '$contact', '$date', '$type', '$status', '$acc_no')"; 
-  $result = $conn->query($sql);
-
-//    if($result){
-//        $text = "success";
-//        ussd_proceed($text);
-//    }else{
-//        $text = "failed";
-//        ussd_proceed($text);
-//    }
-  
-if($result) {
-$text = "Account has been created successfully. Your account number is:\n".$acc_no.". Please keep your account number safe.\n\nSelect option:\n1. Make deposit\n2. Menu";
-ussd_proceed($text);
-  }else{
-    $text = "Invalid name entered.\nPlease enter your full name";
-    ussd_proceed($text);
- }
-  
+ open_account($name, $contact, $date, $acc_no, $type, $status)
 
 
 }else if($level == 2 && $strl <= 5){
     display_register_info();
-}
+}else if($level == 3 && $strl > 4 && $match){
+    //user try name entry again
 
-// else if($level == 3){
+    $name = $explode_input[0];
+    $contact = $explode_input[1];
+    $_SESSION['name'] = $name;
+    $_SESSION['contact'] = $contact;
     
-//     //Post into database
-//     open_account();
+ $date = date('Y-m-d H:i:s');
+ $type = "Savings";
+ $status = '0';
+ 
+ $rand_no = rand(1111111111,9999999999);
+ $acc_no = $rand_no;
     
-// }
+ open_account($name, $contact, $date, $acc_no, $type, $status)
+
+    
+}
 
 
 
@@ -108,6 +99,20 @@ function display_register_info()
 {
     $ussd_text = "Please enter your full name";
     ussd_proceed($ussd_text);
+}
+
+function open_account($name, $contact, $date, $acc_no, $type, $status){
+  $sql = "INSERT INTO `new_account`(`NAME`, `CONTACT`, `DATE_CREATE`, `ACCOUNT_TYPE`, `ACCOUNT_STATUS`, `ACCOUNT_NUMBER`) VALUES ('$name', '$contact', '$date', '$type', '$status', '$acc_no')"; 
+  $result = $conn->query($sql);
+
+if($result) {
+$text = "Account has been created successfully. Your account number is:\n".$acc_no.". Please keep your account number safe.\n\nSelect option:\n1. Make deposit\n2. Menu";
+ussd_proceed($text);
+  }else{
+    $text = "Invalid name entered.\n\nPlease enter your full name:";
+    ussd_proceed($text);
+ }
+  
 }
 
 
