@@ -39,7 +39,7 @@ if($level == 1 && $ussd_string == ""){
   $sql ="SELECT * FROM `new_account` WHERE `CONTACT` LIKE '%".$phone."%'";
   $result = $conn->query($sql);
      
-  if($result ){
+  if($result && sizeof($result)>0){
       
     $i=0; 
     $text = "Select account to receive deposit\n\n";
@@ -61,7 +61,9 @@ if($level == 1 && $ussd_string == ""){
   
 }else if ($level == 2 && $check_num){
 
-  setcookie("id", $namesp, time() + (86400 * 30), "/");
+ //Save id in db
+$sql = "update `id_temp` SET `ID`='$namesp' where `CONTACT`='".$phone."'";
+$result = $conn->query($sql);
 
    $text = "Enter amount (GH¢):";
    ussd_proceed($text); 
@@ -69,13 +71,38 @@ if($level == 1 && $ussd_string == ""){
 }else if ($level == 3){
 
   if($check_num){
-    $_SESSION['amount'] = $namesp;
-  }else{
+ //Get the ID 
 
-  }
-   $id = $_COOKIE["id"]; 
-   $text = "ID saved: ".$session_id;
-   ussd_proceed($text); 
+  $sql ="SELECT * FROM `id_temp` WHERE `CONTACT` LIKE '%".$phone."%'";
+  $result = $conn->query($sql);
+     
+
+  while($row = mysqli_fetch_array($result))
+    {
+     
+      $id = $row['ID'];   
+    }
+      
+
+    //Select account_number from new_account tb
+  $sql ="SELECT * FROM `new_account` WHERE `ID` = '$id'";
+  $result = $conn->query($sql);
+     
+  while($row = mysqli_fetch_array($result))
+    {
+      $id = $row['ACCOUNT_NUMBER']; 
+      $type = $row['ACCOUNT_TYPE'];
+      $name = $row['NAME'];     
+    }
+      
+    //Insert into deposit 
+
+
+  $sql = "INSERT INTO `deposit`(`NAME`, `CONTACT`, `DATE_CREATE`, `ACCOUNT_TYPE`, `ACCOUNT_STATUS`, `ACCOUNT_NUMBER`) VALUES ('$ussd_string', '$phone', '$date', '$type', '$status', '$acc_no')"; 
+  $result = $conn->query($sql);
+
+
+
 
 }else if ($level == 2 && isset($namesp) && $strl > 5 && $match)
 {
@@ -91,6 +118,12 @@ if($level == 1 && $ussd_string == ""){
 
 if($result) {
 $text = "Account has been created successfully. Your account number is:\n".$acc_no.". \n\nPlease visit any nearest branch to validate your account. Thank you.";
+
+//Initialize id_temp table with Id and contact
+
+  $sql = "INSERT INTO `id_temp`(`CONTACT`, `ID`) VALUES ('$phone', '0')"; 
+  $result = $conn->query($sql);
+
 ussd_stop($text);
   }else{
     $text = "Invalid name entered.\n\nPlease enter your full name:";
