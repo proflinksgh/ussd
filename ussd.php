@@ -54,57 +54,57 @@ if($level == 1 && $ussd_string == ""){
 
      
   
-}else if ($level == 2 && $match)
+}else if ($level == 2 && $strl > 5 && $match)
 {
-  $text = "Enter amount GH¢:";
-  ussd_proceed($text);
-//     $namespl = explode ("*",$ussd_string_exploded[1]);
-//     $ussd_string = $namespl[0];
-//     $date = date('Y-m-d H:i:s');
-//     $type = "Savings";
-//     $status = '0';
-//     $rand_no = rand(1111111111,9999999999);
-//     $acc_no = $rand_no;
-    
-//   $sql = "INSERT INTO `new_account`(`NAME`, `CONTACT`, `DATE_CREATE`, `ACCOUNT_TYPE`, `ACCOUNT_STATUS`, `ACCOUNT_NUMBER`) VALUES ('$ussd_string', '$phone', '$date', '$type', '$status', '$acc_no')"; 
-//   $result = $conn->query($sql);
-
-// if($result) {
-// $text = "Account has been created successfully. Your account number is:\n".$acc_no.". Please keep your account number safe.\n\nSelect option:\n1. Make deposit\n2. Menu";
-// ussd_proceed($text);
-//   }else{
-//     $text = "Invalid name entered.\n\nPlease enter your full name:";
-//     ussd_proceed($text);
-//  }
-
-    
-    
-}else if($level == 2 && $strl <= 5){
-    display_register_info();
-}else if($level == 3 && $strl > 4 && $match){
     $namespl = explode ("*",$ussd_string_exploded[1]);
     $ussd_string = $namespl[0];
-    
     $date = date('Y-m-d H:i:s');
     $type = "Savings";
     $status = '0';
     $rand_no = rand(1111111111,9999999999);
     $acc_no = $rand_no;
     
-
   $sql = "INSERT INTO `new_account`(`NAME`, `CONTACT`, `DATE_CREATE`, `ACCOUNT_TYPE`, `ACCOUNT_STATUS`, `ACCOUNT_NUMBER`) VALUES ('$ussd_string', '$phone', '$date', '$type', '$status', '$acc_no')"; 
   $result = $conn->query($sql);
 
 if($result) {
-$text = "Account has been created successfully. Your account number is:\n".$acc_no.". Please visit the nearest branch to validate your account. Thank you";
+$text = "Account has been created successfully. Your account number is:\n".$acc_no.". Please visit any nearest branch to validate your account. Thank you.";
 ussd_proceed($text);
   }else{
     $text = "Invalid name entered.\n\nPlease enter your full name:";
     ussd_proceed($text);
  }
+
+    
+    
+}else if($level == 2 && $strl <= 5){
+    display_register_info();
+}
+
+// else if($level == 3 && $strl > 4 && $match){
+//     $namespl = explode ("*",$ussd_string_exploded[1]);
+//     $ussd_string = $namespl[0];
+    
+//     $date = date('Y-m-d H:i:s');
+//     $type = "Savings";
+//     $status = '0';
+//     $rand_no = rand(1111111111,9999999999);
+//     $acc_no = $rand_no;
     
 
-}
+//   $sql = "INSERT INTO `new_account`(`NAME`, `CONTACT`, `DATE_CREATE`, `ACCOUNT_TYPE`, `ACCOUNT_STATUS`, `ACCOUNT_NUMBER`) VALUES ('$ussd_string', '$phone', '$date', '$type', '$status', '$acc_no')"; 
+//   $result = $conn->query($sql);
+
+// if($result) {
+// $text = "Account has been created successfully. Your account number is:\n".$acc_no.". Please visit the nearest branch to validate your account. Thank you";
+// ussd_proceed($text);
+//   }else{
+//     $text = "Invalid name entered.\n\nPlease enter your full name:";
+//     ussd_proceed($text);
+//  }
+    
+
+// }
 
 // else if($level == 4 && is_numeric($ussd_string)){
 
