@@ -85,7 +85,9 @@ ussd_stop($text);
     
     
 }else if($level == 2 && isset($namesp) && $strl <= 5){
-    display_register_info();
+   
+  ussd_proceed($namesp);
+   // display_register_info();
 }
 
 // else if($level == 3 && $strl > 4 && $match){
