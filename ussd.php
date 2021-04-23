@@ -74,7 +74,7 @@ if($level == 1 && $ussd_string == ""){
 
   }
    $id = $_COOKIE["id"]; 
-   $text = "ID saved: ".$id;
+   $text = "ID saved: ".$session_id;
    ussd_proceed($text); 
 
 }else if ($level == 2 && isset($namesp) && $strl > 5 && $match)
