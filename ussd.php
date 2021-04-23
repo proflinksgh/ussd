@@ -24,8 +24,10 @@ $level = count($ussd_string_exploded);
 $strl = strlen($ussd_string);
 $match = preg_match("/[a-z]/i", $ussd_string);
 
- $namespl = explode ("*",$ussd_string_exploded[1]);
+$namespl = explode ("*",$ussd_string_exploded[1]);
 $namesp = $namespl[0];
+
+$check_num = is_numeric($namesp);
 
 
 if($level == 1 && $ussd_string == ""){
@@ -57,7 +59,7 @@ if($level == 1 && $ussd_string == ""){
 
      
   
-}else if ($level == 2 && !isset($namesp)){
+}else if ($level == 2 && $check_num){
 
    $text = "Enter amount (GH¢):";
    ussd_proceed($text); 
@@ -84,10 +86,9 @@ ussd_stop($text);
 
     
     
-}else if($level == 2 && isset($namesp) && $strl <= 5){
+}else if($level == 2 && $strl <= 5 && !$check_num){
    
-  ussd_proceed($ussd_string);
-   // display_register_info();
+display_register_info();
 }
 
 // else if($level == 3 && $strl > 4 && $match){
