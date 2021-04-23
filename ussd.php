@@ -24,42 +24,47 @@ $level = count($ussd_string_exploded);
 $strl = strlen($ussd_string);
 $match = preg_match("/[a-z]/i", $ussd_string);
 
+ $namespl = explode ("*",$ussd_string_exploded[1]);
+$namesp = $namespl[0];
+
 
 if($level == 1 && $ussd_string == ""){
     display_menu();
 }else if($level == 1 && $ussd_string == "1"){
   display_register_info();
 }else if($level == 1 && $ussd_string == "2"){
-    
-    ussd_stop($ussd_string);
  
-//   $sql ="SELECT * FROM `new_account` WHERE `CONTACT` LIKE '%".$phone."%'";
-//   $result = $conn->query($sql);
+  $sql ="SELECT * FROM `new_account` WHERE `CONTACT` LIKE '%".$phone."%'";
+  $result = $conn->query($sql);
      
-//   if($result ){
+  if($result ){
       
-//     $i=0; 
-//     $text = "Select account to receive deposit\n\n";
-//   while($row = mysqli_fetch_array($result))
-//     {
-//       $i++;
-//       $text .= $row['ID'].". ".$row['ACCOUNT_NUMBER']."(".$row['NAME'].")\n";   
-//     }
-//       ussd_proceed($text); 
+    $i=0; 
+    $text = "Select account to receive deposit\n\n";
+  while($row = mysqli_fetch_array($result))
+    {
+      $i++;
+      $text .= $row['ID'].". ".$row['ACCOUNT_NUMBER']."(".$row['NAME'].")\n";   
+    }
+      ussd_proceed($text); 
       
-//   }else{
+  }else{
       
-//       $text = "No account found";
-//       ussd_proceed($text); 
-//   }
+      $text = "No account found";
+      ussd_proceed($text); 
+  }
      
 
      
   
-}else if ($level == 2 && $strl > 5 && $match)
+}else if ($level == 2 && !isset($namesp)){
+
+   $text = "Enter amount (GH¢):";
+   ussd_proceed($text); 
+
+}else if ($level == 2 && isset($namesp) && $strl > 5 && $match)
 {
-    $namespl = explode ("*",$ussd_string_exploded[1]);
-    $ussd_string = $namespl[0];
+    $ussd_string = $namesp;
     $date = date('Y-m-d H:i:s');
     $type = "Savings";
     $status = '0';
@@ -177,11 +182,6 @@ function display_menu()
 
 
 
-function about($ussd_text)
-{
-    $ussd_text =    "This is a sample registration application";
-    ussd_stop($ussd_text);
-}
 
 function display_register_info()
 {
@@ -196,5 +196,3 @@ function display_register_info()
 // $dbh = null;
 
 ?>
-
-
