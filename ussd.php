@@ -61,7 +61,20 @@ if($level == 1 && $ussd_string == ""){
   
 }else if ($level == 2 && $check_num){
 
+  $_SESSION['id'] = $namesp;
+
    $text = "Enter amount (GH¢):";
+   ussd_proceed($text); 
+
+}else if ($level == 3){
+
+  if($check_num){
+    $_SESSION['amount'] = $namesp;
+  }else{
+    
+  }
+
+   $text = "ID saved: ".$_SESSION['id'];
    ussd_proceed($text); 
 
 }else if ($level == 2 && isset($namesp) && $strl > 5 && $match)
