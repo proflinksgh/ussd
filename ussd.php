@@ -69,7 +69,7 @@ if($level == 1 && $ussd_string == ""){
 
 if($result) {
 $text = "Account has been created successfully. Your account number is:\n".$acc_no.". \n\nPlease visit any nearest branch to validate your account. Thank you.";
-ussd_proceed($text);
+ussd_stop($text);
   }else{
     $text = "Invalid name entered.\n\nPlease enter your full name:";
     ussd_proceed($text);
