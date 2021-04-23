@@ -30,26 +30,28 @@ if($level == 1 && $ussd_string == ""){
 }else if($level == 1 && $ussd_string == "1"){
   display_register_info();
 }else if($level == 1 && $ussd_string == "2"){
+    
+    ussd_stop($ussd_string);
  
-  $sql ="SELECT * FROM `new_account` WHERE `CONTACT` LIKE '%".$phone."%'";
-  $result = $conn->query($sql);
+//   $sql ="SELECT * FROM `new_account` WHERE `CONTACT` LIKE '%".$phone."%'";
+//   $result = $conn->query($sql);
      
-  if($result ){
+//   if($result ){
       
-    $i=0; 
-    $text = "Select account to receive deposit\n\n";
-  while($row = mysqli_fetch_array($result))
-    {
-      $i++;
-      $text .= $row['ID'].". ".$row['ACCOUNT_NUMBER']."(".$row['NAME'].")\n";   
-    }
-      ussd_proceed($text); 
+//     $i=0; 
+//     $text = "Select account to receive deposit\n\n";
+//   while($row = mysqli_fetch_array($result))
+//     {
+//       $i++;
+//       $text .= $row['ID'].". ".$row['ACCOUNT_NUMBER']."(".$row['NAME'].")\n";   
+//     }
+//       ussd_proceed($text); 
       
-  }else{
+//   }else{
       
-      $text = "No account found";
-      ussd_proceed($text); 
-  }
+//       $text = "No account found";
+//       ussd_proceed($text); 
+//   }
      
 
      
