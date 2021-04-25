@@ -29,7 +29,12 @@ $namesp = $namespl[0];
 
 $check_num = is_numeric($namesp);
 
-  display_menu();
+  //display_menu();
+if($level == 1 && $ussd_string == ""){
+    display_menu();
+}
+
+
 // if($level == 1 && $ussd_string == ""){
 //     display_menu();
 // }else if($level == 1 && $ussd_string == "1"){
