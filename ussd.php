@@ -29,113 +29,115 @@ $namesp = $namespl[0];
 
 $check_num = is_numeric($namesp);
 
-
-if($level == 1 && $ussd_string == ""){
-    display_menu();
-}else if($level == 1 && $ussd_string == "1"){
-  display_register_info();
-}else if($level == 1 && $ussd_string == "2"){
+  display_menu();
+// if($level == 1 && $ussd_string == ""){
+//     display_menu();
+// }else if($level == 1 && $ussd_string == "1"){
+//   display_register_info();
+// }else if($level == 1 && $ussd_string == "2"){
  
-  $sql ="SELECT * FROM `new_account` WHERE `CONTACT` LIKE '%".$phone."%'";
-  $result = $conn->query($sql);
+//   $sql ="SELECT * FROM `new_account` WHERE `CONTACT` LIKE '%".$phone."%'";
+//   $result = $conn->query($sql);
      
-  if($result && sizeof($result)>0){
+//   if($result && sizeof($result)>0){
       
-    $i=0; 
-    $text = "Select account to receive deposit\n\n";
-  while($row = mysqli_fetch_array($result))
-    {
-      $i++;
-      $text .= $row['ID'].". ".$row['ACCOUNT_NUMBER']."(".$row['NAME'].")\n";   
-    }
-      ussd_proceed($text); 
+//     $i=0; 
+//     $text = "Select account to receive deposit\n\n";
+//   while($row = mysqli_fetch_array($result))
+//     {
+//       $i++;
+//       $text .= $row['ID'].". ".$row['ACCOUNT_NUMBER']."(".$row['NAME'].")\n";   
+//     }
+//       ussd_proceed($text); 
       
-  }else{
+//   }else{
       
-      $text = "No account found";
-      ussd_proceed($text); 
-  }
+//       $text = "No account found";
+//       ussd_proceed($text); 
+//   }
      
 
      
   
-}else if ($level == 2 && $check_num){
+// }else if ($level == 2 && $check_num){
 
- //Save id in db
-$sql = "update `id_temp` SET `ID`='$namesp' where `CONTACT`='".$phone."'";
-$result = $conn->query($sql);
+//  //Save id in db
+// $sql = "update `id_temp` SET `ID`='$namesp' where `CONTACT`='".$phone."'";
+// $result = $conn->query($sql);
 
-   $text = "Enter amount (GH¢):";
-   ussd_proceed($text); 
+//    $text = "Enter amount (GH¢):";
+//    ussd_proceed($text); 
 
-}else if ($level == 3){
+// }else if ($level == 3){
 
-  if($check_num){
- //Get the ID 
+//   if($check_num){
+//  //Get the ID 
 
-  $sql ="SELECT * FROM `id_temp` WHERE `CONTACT` LIKE '%".$phone."%'";
-  $result = $conn->query($sql);
+//   $sql ="SELECT * FROM `id_temp` WHERE `CONTACT` LIKE '%".$phone."%'";
+//   $result = $conn->query($sql);
      
 
-  while($row = mysqli_fetch_array($result))
-    {
+//   while($row = mysqli_fetch_array($result))
+//     {
      
-      $id = $row['ID'];   
-    }
+//       $id = $row['ID'];   
+//     }
       
 
-    //Select account_number from new_account tb
-  $sql ="SELECT * FROM `new_account` WHERE `ID` = '$id'";
-  $result = $conn->query($sql);
+//     //Select account_number from new_account tb
+//   $sql ="SELECT * FROM `new_account` WHERE `ID` = '$id'";
+//   $result = $conn->query($sql);
      
-  while($row = mysqli_fetch_array($result))
-    {
-      $id = $row['ACCOUNT_NUMBER']; 
-      $type = $row['ACCOUNT_TYPE'];
-      $name = $row['NAME'];     
-    }
-      
-    //Insert into deposit 
+//   while($row = mysqli_fetch_array($result))
+//     {
+//       $id = $row['ACCOUNT_NUMBER']; 
+//       $type = $row['ACCOUNT_TYPE'];
+//       $name = $row['NAME'];     
+//     }
 
 
-  $sql = "INSERT INTO `deposit`(`NAME`, `CONTACT`, `DATE_CREATE`, `ACCOUNT_TYPE`, `ACCOUNT_STATUS`, `ACCOUNT_NUMBER`) VALUES ('$ussd_string', '$phone', '$date', '$type', '$status', '$acc_no')"; 
-  $result = $conn->query($sql);
+//   $sql = "INSERT INTO `deposit`(`NAME`, `CONTACT`, `DATE_CREATE`, `ACCOUNT_TYPE`, `ACCOUNT_STATUS`, `ACCOUNT_NUMBER`) VALUES ('$ussd_string', '$phone', '$date', '$type', '$status', '$acc_no')"; 
+//   $result = $conn->query($sql);
 
-}
+// }
 
 
-}else if ($level == 2 && isset($namesp) && $strl > 5 && $match)
-{
-    $ussd_string = $namesp;
-    $date = date('Y-m-d H:i:s');
-    $type = "Savings";
-    $status = '0';
-    $rand_no = rand(1111111111,9999999999);
-    $acc_no = $rand_no;
+// }else if ($level == 2 && isset($namesp) && $strl > 5 && $match)
+// {
+//     $ussd_string = $namesp;
+//     $date = date('Y-m-d H:i:s');
+//     $type = "Savings";
+//     $status = '0';
+//     $rand_no = rand(1111111111,9999999999);
+//     $acc_no = $rand_no;
     
-  $sql = "INSERT INTO `new_account`(`NAME`, `CONTACT`, `DATE_CREATE`, `ACCOUNT_TYPE`, `ACCOUNT_STATUS`, `ACCOUNT_NUMBER`) VALUES ('$ussd_string', '$phone', '$date', '$type', '$status', '$acc_no')"; 
-  $result = $conn->query($sql);
+//   $sql = "INSERT INTO `new_account`(`NAME`, `CONTACT`, `DATE_CREATE`, `ACCOUNT_TYPE`, `ACCOUNT_STATUS`, `ACCOUNT_NUMBER`) VALUES ('$ussd_string', '$phone', '$date', '$type', '$status', '$acc_no')"; 
+//   $result = $conn->query($sql);
 
-if($result) {
-$text = "Account has been created successfully. Your account number is:\n".$acc_no.". \n\nPlease visit any nearest branch to validate your account. Thank you.";
+// if($result) {
+// $text = "Account has been created successfully. Your account number is:\n".$acc_no.". \n\nPlease visit any nearest branch to validate your account. Thank you.";
 
-//Initialize id_temp table with Id and contact
+//   $sql = "INSERT INTO `id_temp`(`CONTACT`, `ID`) VALUES ('$phone', '0')"; 
+//   $result = $conn->query($sql);
 
-  $sql = "INSERT INTO `id_temp`(`CONTACT`, `ID`) VALUES ('$phone', '0')"; 
-  $result = $conn->query($sql);
-
-ussd_stop($text);
-  }else{
-    $text = "Invalid name entered.\n\nPlease enter your full name:";
-    ussd_proceed($text);
- }
+// ussd_stop($text);
+//   }else{
+//     $text = "Invalid name entered.\n\nPlease enter your full name:";
+//     ussd_proceed($text);
+//  }
 
     
     
-}else if($level == 2 && $strl <= 5 && !$check_num){
+// }else if($level == 2 && $strl <= 5 && !$check_num){
    
-display_register_info();
-}
+// display_register_info();
+// }
+
+
+
+
+
+
 
 // else if($level == 3 && $strl > 4 && $match){
 //     $namespl = explode ("*",$ussd_string_exploded[1]);
