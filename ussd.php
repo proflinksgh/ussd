@@ -36,11 +36,10 @@ if($level == 1 && $ussd_string == ""){
   display_register_info();
 }else if($level == 1 && $ussd_string == "2"){
  
-   $sql ="SELECT * FROM `new_account` WHERE `CONTACT` LIKE '%".$phone."%'";
-   $result = $conn->query($sql);
-    
+  $sql ="SELECT * FROM `new_account` WHERE `CONTACT` LIKE '%".$phone."%'";
+  $result = $conn->query($sql);
      
-  if($result){
+  if($result && sizeof($result)>0){
       
     $i=0; 
     $text = "Select account to receive deposit\n\n";
@@ -56,9 +55,6 @@ if($level == 1 && $ussd_string == ""){
       $text = "No account found";
       ussd_proceed($text); 
   }
-    
-    
-   
      
 
      
@@ -100,7 +96,7 @@ $result = $conn->query($sql);
     }
 
 
-  $sql = "INSERT INTO `deposit`(`NAME`, `CONTACT`, `DATE_CREATE`, `ACCOUNT_TYPE`, `ACCOUNT_STATUS`, `ACCOUNT_NUMBER`) VALUES ('$ussd_string', '$phone', '$date', '$type', '$status', '$acc_no')"; 
+  $sql = "INSERT INTO `deposit`(`AMOUNT`, `DATE_OF_DEPOSIT`, `CUSTOMER_ID`) VALUES ('$ussd_string', '$date', '$id')"; 
   $result = $conn->query($sql);
 
 }
