@@ -102,21 +102,24 @@ $result = $conn->query($sql);
      }
 
 
-        $text = "Here now";
+ 
+
+    $sql ="SELECT COUNT(AMOUNT) as amount FROM `withdrawal` WHERE `CUSTOMER_ID` = '$id'";
+   $result = $conn->query($sql);
+
+   if($result){
+      while($row = mysqli_fetch_array($result))
+    {
+      $with_amt = $row['amount'];   
+    }
+   }else{
+      $with_amt = 0;
+     }
+
+
+            $text = "Dep amt: ".$dep_amt.", With amt: ".$with_amt;
    ussd_stop($text); 
 
-
-   //  $sql ="SELECT COUNT(AMOUNT) as amount FROM `withdrawal` WHERE `CUSTOMER_ID` = '$id'";
-   // $result = $conn->query($sql);
-
-   // if($result){
-   //    while($row = mysqli_fetch_array($result))
-   //  {
-   //    $with_amt = $row['amount'];   
-   //  }
-   // }else{
-   //    $with_amt = 0;
-   //   }
    
    
    //   $bal = $dep_amt - $with_amt;
