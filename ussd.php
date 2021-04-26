@@ -84,7 +84,7 @@ $result = $conn->query($sql);
     }
       
 
-  $sql = "INSERT INTO `deposit`(`AMOUNT`, `DATE_OF_DEPOSIT`, `CUSTOMER_ID`) VALUES ('$nameval', '$date', '$id')"; 
+  $sql = "INSERT INTO `deposit`(`AMOUNT`, `DATE_OF_DEPOSIT`, `CUSTOMER_ID`) VALUES ('$namesp', '$date', '$id')"; 
   $result = $conn->query($sql);
 
 
@@ -119,7 +119,7 @@ $result = $conn->query($sql);
 
 
      $bal = $dep_amt - $with_amt;
-     $text="Your deposit of GH¢".$nameval." is successful. Your new balance is: GH¢".$bal;
+     $text="Your deposit of GH¢".$namesp." is successful. Your new balance is: GH¢".$bal;
     ussd_stop($text);
 
    }
