@@ -40,7 +40,7 @@ if($level == 1 && $ussd_string == ""){
    $result = $conn->query($sql);
     
      
-  if(sizeof($result)>0){
+  if($result){
       
     $i=0; 
     $text = "Select account to receive deposit\n\n";
