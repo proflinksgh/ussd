@@ -83,22 +83,26 @@ $result = $conn->query($sql);
       $id = $row['ID'];   
     }
       
+      $text = "Id is: ".$id;
+     ussd_stop($text);
 
-    //Select account_number from new_account tb
-  $sql ="SELECT * FROM `new_account` WHERE `ID` = '$id'";
-  $result = $conn->query($sql);
+  // $sql ="SELECT * FROM `new_account` WHERE `ID` = '$id'";
+  // $result = $conn->query($sql);
      
-  while($row = mysqli_fetch_array($result))
-    {
-      $id = $row['ACCOUNT_NUMBER']; 
-      $type = $row['ACCOUNT_TYPE'];
-      $name = $row['NAME'];     
-    }
+  // while($row = mysqli_fetch_array($result))
+  //   {
+  //     $id = $row['ACCOUNT_NUMBER']; 
+  //     $type = $row['ACCOUNT_TYPE'];
+  //     $name = $row['NAME'];     
+  //   }
 
 
-  $sql = "INSERT INTO `deposit`(`AMOUNT`, `DATE_OF_DEPOSIT`, `CUSTOMER_ID`) VALUES ('$ussd_string', '$date', '$id')"; 
-  $result = $conn->query($sql);
+  // $sql = "INSERT INTO `deposit`(`AMOUNT`, `DATE_OF_DEPOSIT`, `CUSTOMER_ID`) VALUES ('$ussd_string', '$date', '$id')"; 
+  // $result = $conn->query($sql);
 
+}else{
+     $text = "Invalid account selection";
+     ussd_stop($text); 
 }
 
 
