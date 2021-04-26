@@ -117,16 +117,9 @@ $result = $conn->query($sql);
      }
 
 
-            $text = "Dep amt: ".$dep_amt.", With amt: ".$with_amt;
-   ussd_stop($text); 
-
-   
-   
-   //   $bal = $dep_amt - $with_amt;
-
-
-   //   $text="Your deposit of GH¢".$ussd_string." is successful. Your new balance is: GH¢".$bal;
-
+     $bal = $dep_amt - $with_amt;
+     $text="Your deposit of GH¢".$ussd_string." is successful. Your new balance is: GH¢".$bal;
+    ussd_stop($text);
 
    }
 
