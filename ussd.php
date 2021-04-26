@@ -71,7 +71,6 @@ $result = $conn->query($sql);
 }else if ($level == 3){
 
   if($check_num){
- //Get the ID 
 
   $sql ="SELECT * FROM `id_temp` WHERE `CONTACT` LIKE '%".$phone."%'";
   $result = $conn->query($sql);
@@ -125,9 +124,6 @@ $result = $conn->query($sql);
 
 
    }
-
-}
-
 
 
 }else{
