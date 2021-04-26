@@ -39,7 +39,7 @@ if($level == 1 && $ussd_string == ""){
   $sql ="SELECT * FROM `new_account` WHERE `CONTACT` LIKE '%".$phone."%'";
   $result = $conn->query($sql);
      
-  if($result && sizeof($result)>0){
+  if($result){
       
     $i=0; 
     $text = "Select account to receive deposit\n\n";
