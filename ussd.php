@@ -83,22 +83,52 @@ $result = $conn->query($sql);
       $id = $row['ID'];   
     }
       
-      $text = "Id is: ".$id;
-     ussd_stop($text);
 
-  // $sql ="SELECT * FROM `new_account` WHERE `ID` = '$id'";
-  // $result = $conn->query($sql);
-     
-  // while($row = mysqli_fetch_array($result))
-  //   {
-  //     $id = $row['ACCOUNT_NUMBER']; 
-  //     $type = $row['ACCOUNT_TYPE'];
-  //     $name = $row['NAME'];     
-  //   }
+  $sql = "INSERT INTO `deposit`(`AMOUNT`, `DATE_OF_DEPOSIT`, `CUSTOMER_ID`) VALUES ('$ussd_string', '$date', '$id')"; 
+  $result = $conn->query($sql);
 
 
-  // $sql = "INSERT INTO `deposit`(`AMOUNT`, `DATE_OF_DEPOSIT`, `CUSTOMER_ID`) VALUES ('$ussd_string', '$date', '$id')"; 
-  // $result = $conn->query($sql);
+  if($result){
+
+     $sql ="SELECT COUNT(AMOUNT) as amount FROM `deposit` WHERE `CUSTOMER_ID` = '$id'";
+   $result = $conn->query($sql);
+
+   if($result){
+      while($row = mysqli_fetch_array($result))
+    {
+      $dep_amt = $row['amount'];   
+    }
+   }else{
+      $dep_amt = 0;
+     }
+
+
+
+
+    $sql ="SELECT COUNT(AMOUNT) as amount FROM `withdrawal` WHERE `CUSTOMER_ID` = '$id'";
+   $result = $conn->query($sql);
+
+   if($result){
+      while($row = mysqli_fetch_array($result))
+    {
+      $with_amt = $row['amount'];   
+    }
+   }else{
+      $with_amt = 0;
+     }
+   
+   
+     $bal = $dep_amt - $with_amt;
+
+
+     $text="Your deposit of GH¢".$ussd_string." is successful. Your new balance is: GH¢".$bal;
+
+
+   }
+
+}
+
+
 
 }else{
      $text = "Invalid account selection";
