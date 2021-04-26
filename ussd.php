@@ -26,6 +26,7 @@ $match = preg_match("/[a-z]/i", $ussd_string);
 
 $namespl = explode ("*",$ussd_string_exploded[1]);
 $namesp = $namespl[0];
+$nameval = $namespl[1];
 
 $check_num = is_numeric($namesp);
 
@@ -83,7 +84,7 @@ $result = $conn->query($sql);
     }
       
 
-  $sql = "INSERT INTO `deposit`(`AMOUNT`, `DATE_OF_DEPOSIT`, `CUSTOMER_ID`) VALUES ('$ussd_string', '$date', '$id')"; 
+  $sql = "INSERT INTO `deposit`(`AMOUNT`, `DATE_OF_DEPOSIT`, `CUSTOMER_ID`) VALUES ('$nameval', '$date', '$id')"; 
   $result = $conn->query($sql);
 
 
@@ -118,7 +119,7 @@ $result = $conn->query($sql);
 
 
      $bal = $dep_amt - $with_amt;
-     $text="Your deposit of GH¢".$ussd_string." is successful. Your new balance is: GH¢".$bal;
+     $text="Your deposit of GH¢".$nameval." is successful. Your new balance is: GH¢".$bal;
     ussd_stop($text);
 
    }
