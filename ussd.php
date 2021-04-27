@@ -63,7 +63,22 @@ if($level == 1 && $ussd_string == ""){
 }else if ($level == 2 && $check_num){
 
  //Save id in db
-$sql = "update `id_temp` SET `ID`='$namesp' where `CONTACT`='".$phone."'";
+
+//Check if selection exist 
+  $sql ="SELECT COUNT(ID) as id FROM `new_account` WHERE `ID` = '$namesp'";
+  $result = $conn->query($sql);
+     
+
+  while($row = mysqli_fetch_array($result))
+    {
+     
+      $id = $row['id'];   
+    }
+
+
+
+  if($id > 0){
+    $sql = "update `id_temp` SET `ID`='$namesp' where `CONTACT`='".$phone."'";
 $result = $conn->query($sql);
 
    $text = "Enter amount (GH¢):";
@@ -130,6 +145,14 @@ $result = $conn->query($sql);
      $text = "Invalid account selection";
      ussd_stop($text); 
 }
+
+  }else{
+     $text = "Invalid selection. Please try again";
+   ussd_stop($text); 
+  }
+
+
+
 
 
 }else if ($level == 2 && isset($namesp) && $strl > 5 && $match)
