@@ -113,7 +113,7 @@ $result = $conn->query($sql);
 
   if($result){
 
-     $sql ="SELECT COUNT(AMOUNT) as amount FROM `deposit` WHERE `CUSTOMER_ID` = '$id'";
+     $sql ="SELECT SUM(AMOUNT) as amount FROM `deposit` WHERE `CUSTOMER_ID` = '$id'";
    $result = $conn->query($sql);
 
    if($result){
@@ -128,7 +128,7 @@ $result = $conn->query($sql);
 
  
 
-    $sql ="SELECT COUNT(AMOUNT) as amount FROM `withdrawal` WHERE `CUSTOMER_ID` = '$id'";
+    $sql ="SELECT SUM(AMOUNT) as amount FROM `withdrawal` WHERE `CUSTOMER_ID` = '$id'";
    $result = $conn->query($sql);
 
    if($result){
