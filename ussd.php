@@ -84,7 +84,7 @@ $result = $conn->query($sql);
     }
       
 
-  $sql = "INSERT INTO `deposit`(`AMOUNT`, `DATE_OF_DEPOSIT`, `CUSTOMER_ID`) VALUES ('$namesp', '$date', '$id')"; 
+  $sql = "INSERT INTO `deposit`(`AMOUNT`, `DATE_OF_DEPOSIT`, `CUSTOMER_ID`) VALUES ('$ussd_string_exploded[2]', '$date', '$id')"; 
   $result = $conn->query($sql);
 
 
