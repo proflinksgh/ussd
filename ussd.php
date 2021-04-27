@@ -78,11 +78,19 @@ if($level == 1 && $ussd_string == ""){
 
 
   if($id > 0){
-    $sql = "update `id_temp` SET `ID`='$namesp' where `CONTACT`='".$phone."'";
+$sql = "update `id_temp` SET `ID`='$namesp' where `CONTACT`='".$phone."'";
 $result = $conn->query($sql);
 
    $text = "Enter amount (GH¢):";
    ussd_proceed($text); 
+  }else{
+     $text = "Invalid selection. Please try again";
+   ussd_stop($text); 
+  }
+
+
+
+
 
 }else if ($level == 3){
 
@@ -145,14 +153,6 @@ $result = $conn->query($sql);
      $text = "Invalid account selection";
      ussd_stop($text); 
 }
-
-  }else{
-     $text = "Invalid selection. Please try again";
-   ussd_stop($text); 
-  }
-
-
-
 
 
 }else if ($level == 2 && isset($namesp) && $strl > 5 && $match)
