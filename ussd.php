@@ -119,7 +119,7 @@ $result = $conn->query($sql);
 
 
      $bal = $dep_amt - $with_amt;
-     $text="Your deposit of GH¢".$namespl[1]." is successful. Your new balance is: GH¢".$bal;
+     $text="Your deposit of GH¢".$ussd_string_exploded[1]." is successful. Your new balance is: GH¢".$bal;
     ussd_stop($text);
 
    }
